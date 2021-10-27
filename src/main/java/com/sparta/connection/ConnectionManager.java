@@ -9,16 +9,18 @@ import java.util.regex.Pattern;
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
     private static StringBuilder stringBuilder;
-    public enum ENDPOINTS {FIND, WEATHER, BOX};
+    public enum ENDPOINTS {FIND, WEATHER, BOX}
 
-    public static String getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+    public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
         switch (endpoints) {
             case BOX -> {url = buildBoxUrl(params);}
             case FIND -> {url =  buildFindUrl(params);}
             case WEATHER -> {url = buildWeatherUrl(params);}
         }
-        return url;
+        
+        params.put("url", url);
+        return params;
     }
 
     /***
@@ -76,7 +78,7 @@ public class ConnectionManager {
             });
 
             stringBuilder.append("appid=" + Util.getAPIKey());
-        } else throw new IllegalArgumentException("lat and long are required");
+        } else throw new IllegalArgumentException("lat and lon are required");
         return stringBuilder.toString();
     }
 
