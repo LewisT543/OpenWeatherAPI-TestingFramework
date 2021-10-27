@@ -10,6 +10,9 @@ public class WindDTO {
 	@JsonProperty("speed")
 	private Double speed;
 
+	@JsonProperty("gust")
+	private Double gust;
+
 	public Integer getDeg(){
 		return deg;
 	}
@@ -18,11 +21,16 @@ public class WindDTO {
 		return speed;
 	}
 
+	public Double getGust() {
+		return gust;
+	}
+
 	@Override
 	public String toString() {
 		return "WindDTO{" +
 				"deg=" + deg +
 				", speed=" + speed +
+				", gust=" + gust +
 				'}';
 	}
 }

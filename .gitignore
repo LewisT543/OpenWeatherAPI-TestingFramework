@@ -42,3 +42,8 @@ out/
 
 # VERY VERY IMPORTANT DO NOT REMOVE - APIKEY
 src/main/resources/application.properties
+
+# Other stuff
+/src/main/java/com/sparta/old/
+/src/main/resources/city.json
+/src/main/resources/weather_16.json
