@@ -1,4 +1,4 @@
-package com.sparta;
+package com.sparta.injector;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.connection.ConnectionManager;

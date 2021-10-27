@@ -22,6 +22,12 @@ public class MainDTO {
 	@JsonProperty("temp_max")
 	private Integer tempMax;
 
+	@JsonProperty("sea_level")
+	private Integer seaLevel;
+
+	@JsonProperty("grnd_level")
+	private Integer grndLevel;
+
 	public Double getTemp(){
 		return temp;
 	}
@@ -46,6 +52,14 @@ public class MainDTO {
 		return tempMax;
 	}
 
+	public Integer getSeaLevel() {
+		return seaLevel;
+	}
+
+	public Integer getGrndLevel() {
+		return grndLevel;
+	}
+
 	@Override
 	public String toString() {
 		return "MainDTO{" +
@@ -55,6 +69,8 @@ public class MainDTO {
 				", pressure=" + pressure +
 				", feelsLike=" + feelsLike +
 				", tempMax=" + tempMax +
+				", seaLevel=" + seaLevel +
+				", grndLevel=" + grndLevel +
 				'}';
 	}
 }

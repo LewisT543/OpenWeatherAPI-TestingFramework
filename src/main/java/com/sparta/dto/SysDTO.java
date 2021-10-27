@@ -19,6 +19,9 @@ public class SysDTO {
 	@JsonProperty("type")
 	private Integer type;
 
+	@JsonProperty("message")
+	private Double message;
+
 	public String getCountry(){
 		return country;
 	}
@@ -39,6 +42,10 @@ public class SysDTO {
 		return type;
 	}
 
+	public Double getMessage() {
+		return message;
+	}
+
 	@Override
 	public String toString() {
 		return "SysDTO{" +
@@ -47,6 +54,7 @@ public class SysDTO {
 				", sunset=" + sunset +
 				", id=" + id +
 				", type=" + type +
+				", message=" + message +
 				'}';
 	}
 }
