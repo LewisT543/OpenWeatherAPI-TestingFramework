@@ -18,7 +18,7 @@ public class ConnectionManager {
             case FIND -> {url =  buildFindUrl(params);}
             case WEATHER -> {url = buildWeatherUrl(params);}
         }
-        
+
         params.put("url", url);
         return params;
     }
@@ -61,7 +61,7 @@ public class ConnectionManager {
      * cnt, mode, units, lang
      * lat and lon in response will be different to query params
      * @return a URL String
-     * @throws IllegalArgumentException if lat and long are missing
+     * @throws IllegalArgumentException if lat and lon are missing
      * @param params
      */
     private static String buildFindUrl(HashMap<String, String> params) throws IllegalArgumentException {
