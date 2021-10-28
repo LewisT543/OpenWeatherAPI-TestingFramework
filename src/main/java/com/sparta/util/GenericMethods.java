@@ -109,4 +109,12 @@ public class GenericMethods {
         return object instanceof String;
     }
 
+    public boolean IsNotNull(Object o){
+        return o != null;
+    }
+
+    public boolean isBetween0And100(double value){
+        return value>= 0 && value<=100;
+    }
+
 }
