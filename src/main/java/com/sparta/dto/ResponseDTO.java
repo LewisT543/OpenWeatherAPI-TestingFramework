@@ -323,8 +323,9 @@ public class ResponseDTO{
 		return mainDTO.getTempMax() > 0;
 	}
 
-	public boolean isMinTempGreaterThanZeroKelvin(){
+	public boolean isMinTempGreaterThanZeroKelvin() {
 		return mainDTO.getTempMin() > 0;
+	}
 
 	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100(){
 		return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0,100.0);
@@ -342,5 +343,6 @@ public class ResponseDTO{
 		return GenericMethods.isBetweenXAndY(getCoord().getLon(),-180.0, 180.0);
 
 	}
+
 
 }
