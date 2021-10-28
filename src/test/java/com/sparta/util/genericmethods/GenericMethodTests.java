@@ -109,36 +109,37 @@ public class GenericMethodTests {
         @Test
         @DisplayName("comparing 2.0 and 0.0 return true")
         void givenAD2AndAD0() {
-            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(2.0,0.0));
+            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(2.0, 0.0));
         }
 
         @Test
         @DisplayName("given 0.0 and 2.0 return false")
         void givenD0AndD2ReturnFalse() {
-            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(0.0,2.0));
+            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(0.0, 2.0));
         }
 
         @Test
         @DisplayName("given 2 and null return false")
         void given2AndNullReturnFalse() {
-            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(2,null));
+            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(2, null));
         }
 
         @Test
         @DisplayName("given null and 2 return false")
         void givenNullAnd2ReturnFalse() {
-            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(null,2.0));
+            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(null, 2.0));
         }
 
         @Test
         @DisplayName("given 2 and 0.0 return true")
         void given2AndD0ReturnTrue() {
-            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(2,0.0));
+            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(2, 0.0));
         }
+
         @Test
         @DisplayName("given 0 and 2.0 return False")
         void given0AndD2ReturnFalse() {
-            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(0,2.0));
+            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(0, 2.0));
 
         }
 
@@ -160,59 +161,60 @@ public class GenericMethodTests {
         }
     }
 
-    @Nested
-    @DisplayName("Checking if Double is greater than number")
-    class CheckIsGreaterThan {
-        @Test
-        @DisplayName("Check one is greater than zero")
-        void checkOneIsGreaterThanZero() {
-            Assertions.assertTrue(GenericMethods.isGreaterThan(Double.valueOf(0), Double.valueOf(1)));
-        }
-
-        @Test
-        @DisplayName("Check zero is not greater than one")
-        void checkZeroIsNotGreaterThanOne() {
-            Assertions.assertFalse(GenericMethods.isGreaterThan(Double.valueOf(1), Double.valueOf(0)));
-        }
-
-        @Test
-        @DisplayName("Check that positive number is greater than negative number")
-        void checkThatPositiveNumberIsGreaterThanNegativeNumber() {
-            Assertions.assertTrue(GenericMethods.isGreaterThan(Double.valueOf(-1), Double.valueOf(1)));
-        }
-
-        @Test
-        @DisplayName("Check that negative number is not greater than positive number")
-        void checkThatNegativeNumberIsNotGreaterThanPositiveNumber() {
-            Assertions.assertFalse(GenericMethods.isGreaterThan(Double.valueOf(1), Double.valueOf(-1)));
-        }
-
-        @Test
-        @DisplayName("Check that 1.56 is greater than 1.33")
-        void checkThat1Point56IsGreaterThan1Point33() {
-            Assertions.assertTrue(GenericMethods.isGreaterThan(Double.valueOf(1.33), Double.valueOf(1.56)));
-        }
-
-        @Test
-        @DisplayName("Check that 1.33 is not greater than 1.56")
-        void checkThat1Point33IsNotGreaterThan1Point56() {
-            Assertions.assertFalse(GenericMethods.isGreaterThan(Double.valueOf(1.56), Double.valueOf(1.33)));
-        }
-
-        @Test
-        @DisplayName("Check that NullPointerException is thrown when either parameter is null")
-        void checkThatNullPointerExceptionIsThrownWhenEitherParameterIsNull() {
-            Assertions.assertThrows(NullPointerException.class, () -> {
-                GenericMethods.isGreaterThan(null, Double.valueOf(1));
-            });
-            Assertions.assertThrows(NullPointerException.class, () -> {
-                GenericMethods.isGreaterThan(Double.valueOf(1), null);
-            });
-            Assertions.assertThrows(NullPointerException.class, () -> {
-                GenericMethods.isGreaterThan(null, null);
-            });
-        }
-    }
+//    @Nested
+//    @DisplayName("Checking if Double is greater than number")
+//    class CheckIsGreaterThan {
+//        @Test
+//        @DisplayName("Check one is greater than zero")
+//        void checkOneIsGreaterThanZero() {
+//            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(0, 1.0);
+//        }
+//
+//        @Test
+//        @DisplayName("Check zero is not greater than one")
+//        void checkZeroIsNotGreaterThanOne() {
+//            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(1, 0.0);
+//        }
+//
+//        @Test
+//        @DisplayName("Check that positive number is greater than negative number")
+//        void checkThatPositiveNumberIsGreaterThanNegativeNumber() {
+//            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(-1, 1.0));
+//        }
+//
+//        @Test
+//        @DisplayName("Check that negative number is not greater than positive number")
+//        void checkThatNegativeNumberIsNotGreaterThanPositiveNumber() {
+//            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(1, -1.0));
+//        }
+//
+//        @Test
+//        @DisplayName("Check that 1.56 is greater than 1.33")
+//        void checkThat1Point56IsGreaterThan1Point33() {
+//            Assertions.assertTrue(GenericMethods.isGreaterThanOrEqualTo(1.33, 1.56)
+//            ));
+//        }
+//
+//        @Test
+//        @DisplayName("Check that 1.33 is not greater than 1.56")
+//        void checkThat1Point33IsNotGreaterThan1Point56() {
+//            Assertions.assertFalse(GenericMethods.isGreaterThanOrEqualTo(Double.valueOf(1.56), Double.valueOf(1.33)));
+//        }
+//
+//        @Test
+//        @DisplayName("Check that NullPointerException is thrown when either parameter is null")
+//        void checkThatNullPointerExceptionIsThrownWhenEitherParameterIsNull() {
+//            Assertions.assertThrows(NullPointerException.class, () -> {
+//                GenericMethods.isGreaterThanOrEqualTo(null, Double.valueOf(1));
+//            });
+//            Assertions.assertThrows(NullPointerException.class, () -> {
+//                GenericMethods.isGreaterThanOrEqualTo(Double.valueOf(1), null);
+//            });
+//            Assertions.assertThrows(NullPointerException.class, () -> {
+//                GenericMethods.isGreaterThanOrEqualTo(null, null);
+//            });
+//        }
+//    }
 
     @Nested
     @DisplayName("Checking if an object is a double")
@@ -262,40 +264,40 @@ public class GenericMethodTests {
         @Test
         @DisplayName("Check if Double array is a Double")
         void checkIfDoubleArrayIsADouble() {
-            Double[] input = new Double[] {};
+            Double[] input = new Double[]{};
             Assertions.assertFalse(GenericMethods.isADouble(input));
         }
     }
 
-  
+
     @Nested
     @DisplayName("isInteger Tests")
-    class isIntegerTests{
+    class isIntegerTests {
         Integer aInteger = 7;
         String aString = "A Test";
         Double aDouble = 7.4312;
 
         @Test
         @DisplayName("Given an integer type object return true")
-        void givenIntegerClassReturnTrue(){
+        void givenIntegerClassReturnTrue() {
             Assertions.assertTrue(GenericMethods.isInteger(aInteger));
         }
 
         @Test
         @DisplayName("Given null return false")
-        void givenNullReturnFalse(){
+        void givenNullReturnFalse() {
             Assertions.assertFalse(GenericMethods.isInteger(null));
         }
 
         @Test
         @DisplayName("Given a string object return false")
-        void givenStringObjectReturnFalse(){
+        void givenStringObjectReturnFalse() {
             Assertions.assertFalse(GenericMethods.isInteger(aString));
         }
 
         @Test
         @DisplayName("Given a double object return false")
-        void givenDoubleObjectReturnFalse(){
+        void givenDoubleObjectReturnFalse() {
             Assertions.assertFalse(GenericMethods.isInteger(aDouble));
         }
 
@@ -393,47 +395,48 @@ public class GenericMethodTests {
             assertFalse(GenericMethods.cityLatIsCorrect("Incorrect", 35.479167));
         }
 
+        @Nested
+        @DisplayName("isString Tests")
+        class isStringTests {
+            Integer aInteger = 7;
+            String aString = "A Test";
+            Double aDouble = 7.4312;
 
-    @DisplayName("isString Tests")
-    class isStringTests{
-        Integer aInteger = 7;
-        String aString = "A Test";
-        Double aDouble = 7.4312;
+            @Test
+            @DisplayName("Given an string type object return true")
+            void givenStringObjectReturnTrue() {
+                Assertions.assertTrue(GenericMethods.isString(aString));
+            }
 
-        @Test
-        @DisplayName("Given an string type object return true")
-        void givenStringObjectReturnTrue(){
-            Assertions.assertTrue(GenericMethods.isString(aString));
+            @Test
+            @DisplayName("Given null return false")
+            void givenNullReturnFalse() {
+                Assertions.assertFalse(GenericMethods.isString(null));
+            }
+
+            @Test
+            @DisplayName("Given an integer object return false")
+            void givenIntegerObjectReturnFalse() {
+                Assertions.assertFalse(GenericMethods.isString(aInteger));
+            }
+
+            @Test
+            @DisplayName("Given an double object return false")
+            void givenDoubleObjectReturnFalse() {
+                Assertions.assertFalse(GenericMethods.isString(aDouble));
+            }
         }
 
-        @Test
-        @DisplayName("Given null return false")
-        void givenNullReturnFalse(){
-            Assertions.assertFalse(GenericMethods.isString(null));
+        @AfterEach
+        void tearDown(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : END");
         }
 
-        @Test
-        @DisplayName("Given an integer object return false")
-        void givenIntegerObjectReturnFalse(){
-            Assertions.assertFalse(GenericMethods.isString(aInteger));
+        @AfterAll
+        static void tearDownAll(TestInfo testInfo) {
+            System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
+
         }
 
-        @Test
-        @DisplayName("Given an double object return false")
-        void givenDoubleObjectReturnFalse(){
-            Assertions.assertFalse(GenericMethods.isString(aDouble));
-        }
     }
-  
-    @AfterEach
-    void tearDown (TestInfo testInfo) {
-        System.out.println(testInfo.getDisplayName() + " : END");
-    }
-
-    @AfterAll
-    static void tearDownAll(TestInfo testInfo) {
-        System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
-
-    }
-
 }

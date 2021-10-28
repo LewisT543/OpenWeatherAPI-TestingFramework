@@ -67,9 +67,6 @@ public class GenericMethods {
         return false;
     }
 
-    public static boolean isGreaterThanZero(Double input){
-        return input >= 0;
-
 
     public static boolean isGreaterThanOrEqualToZero(Object input){
         return isGreaterThanOrEqualTo(input,0.0);
