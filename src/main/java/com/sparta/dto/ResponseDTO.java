@@ -318,6 +318,14 @@ public class ResponseDTO{
 		return isInteger(getClouds().getAll());
 	}
 
+
+	public boolean isMaxTempGreaterThanZeroKelvin(){
+		return mainDTO.getTempMax() > 0;
+	}
+
+	public boolean isMinTempGreaterThanZeroKelvin(){
+		return mainDTO.getTempMin() > 0;
+
 	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100(){
 		return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0,100.0);
 	}
@@ -332,6 +340,7 @@ public class ResponseDTO{
 
 	public boolean isCoordLonGreaterThanMinus180AndLessThan180(){
 		return GenericMethods.isBetweenXAndY(getCoord().getLon(),-180.0, 180.0);
+
 	}
 
 }
