@@ -322,4 +322,8 @@ public class ResponseDTO{
 		return mainDTO.getTempMax() > 0;
 	}
 
+	public boolean isMinTempGreaterThanZeroKelvin(){
+		return mainDTO.getTempMin() > 0;
+	}
+
 }
