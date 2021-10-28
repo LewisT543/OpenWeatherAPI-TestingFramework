@@ -26,11 +26,11 @@ public class SysDTO {
 		return country;
 	}
 
-	public Integer getSunrise(){
+	public Long getSunrise(){
 		return sunrise;
 	}
 
-	public Integer getSunset(){
+	public Long getSunset(){
 		return sunset;
 	}
 
