@@ -8,10 +8,10 @@ public class SysDTO {
 	private String country;
 
 	@JsonProperty("sunrise")
-	private Integer sunrise;
+	private Long sunrise;
 
 	@JsonProperty("sunset")
-	private Integer sunset;
+	private Long sunset;
 
 	@JsonProperty("id")
 	private Integer id;
