@@ -124,7 +124,7 @@ public class GenericMethods {
         return o != null;
     }
 
-    public static boolean isBetween0And100(Double value, Double x, Double y){
+    public static boolean isBetweenXAndY(Double value, Double x, Double y){
         try {
             return value>= x && value<=y;
         } catch (NullPointerException npe){
