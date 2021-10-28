@@ -318,4 +318,8 @@ public class ResponseDTO{
 		return isInteger(getClouds().getAll());
 	}
 
+	public boolean isMaxTempGreaterThanZeroKelvin(){
+		return mainDTO.getTempMax() > 0;
+	}
+
 }
