@@ -6,6 +6,10 @@ import com.sparta.dto.ResponseDTO;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * @deprecated use Injector.java this class will be removed soon
+ */
+@Deprecated(forRemoval = true)
 public class Injector_Alt {
     private static ObjectMapper objectMapper = new ObjectMapper();
 

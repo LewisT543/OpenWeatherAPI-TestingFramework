@@ -8,6 +8,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * @deprecated use ConnectionManager.java this class will be removed soon
+ */
+@Deprecated(forRemoval = true)
 public class ConnectionManager_Alt{
 
     private static final String BASE_URL = "https://api.openweathermap.org";

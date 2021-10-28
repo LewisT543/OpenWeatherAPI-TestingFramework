@@ -11,6 +11,17 @@ public class ConnectionManager {
     private static StringBuilder stringBuilder;
     public enum ENDPOINTS {FIND, WEATHER, BOX}
 
+
+    /**
+     * @author Edmund
+     * @version 1.2
+     * Main method for the connection manager class. Takes an enum for the desired endpoint.
+     * Returns a hashmap with the url set to key url and the original query parameters
+     * @param endpoints
+     * @param params
+     * @return Hashmap<String,String>
+     * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
+     */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
         switch (endpoints) {
@@ -26,6 +37,8 @@ public class ConnectionManager {
     //TODO: Null check
 
     /***
+     * @author Edmund
+     * @version 1.0
      * Builds the /box endpoint of the API. bbox is a required parameter for this endpoint.
      * lang and units are optional
      * @throws IllegalArgumentException if bbox param is missing or not in format n1,n2,n3,n4,n5
@@ -58,7 +71,7 @@ public class ConnectionManager {
 
     /**
      * @author Edmund
-     * @version 1.0
+     * @version 1.2
      * Builds url for the /find endpoint. Takes in a hashmap of params.
      * Expected params are lat, lon are required; following are optional
      * cnt, mode, units, lang
@@ -88,7 +101,7 @@ public class ConnectionManager {
 
     /**
      * @author Edmund
-     * @version 1.0
+     * @version 1.2
      * Builds the /weather endpoint url - q is a required parameter for this endpoint
      * mode is optional - should be set to json for this test
      * @param params
