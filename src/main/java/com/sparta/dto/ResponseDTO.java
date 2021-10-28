@@ -1,8 +1,9 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
+
+import static com.sparta.util.GenericMethods.*;
 
 public class ResponseDTO{
 
@@ -134,31 +135,31 @@ public class ResponseDTO{
 
 
 	public boolean isCodInteger(){
-		return isAnInt(getCod());
+		return isInteger(getCod());
 	}
 
 	public boolean isNameString(){
-		return isAString(getName());
+		return isString(getName());
 	}
 
 	public boolean isIdInt(){
-		return isAnInt(getId());
+		return isInteger(getId());
 	}
 
 	public boolean isTimeZoneInteger(){
-		return isAnInt(getTimezone());
+		return isInteger(getTimezone());
 	}
 
 	public boolean isSysSunsetALong(){
-		return isALong(getSys().getSunset());
+		return isLong(getSys().getSunset());
 	}
 
 	public boolean isSysSunriseALong(){
-		return isALong(getSys().getSunrise());
+		return isLong(getSys().getSunrise());
 	}
 
 	public boolean isSysCountryString(){
-		return isAString(getSys().getCountry());
+		return isString(getSys().getCountry());
 	}
 
 	public boolean isSysMessageDouble(){
@@ -166,7 +167,7 @@ public class ResponseDTO{
 	}
 
 	public boolean isDtALong(){
-		return isALong(getDt());
+		return isLong(getDt());
 	}
 
 	public boolean isSnowH1Double(){
@@ -188,21 +189,21 @@ public class ResponseDTO{
 	//WEATHER METHODS NEEDS TO BE CHECKED
 	public boolean isWeatherIdAnInt() {
 		//Weather is a list of WeatherDTO's
-		return isAnInt(getWeather().get(0).getId());
+		return isInteger(getWeather().get(0).getId());
 	}
 	public boolean isWeatherMainAString() {
 		//Weather is a list of WeatherDTO's
-		return isAString(getWeather().get(0).getMain());
+		return isString(getWeather().get(0).getMain());
 	}
 
 	public boolean isWeatherDescriptionAString() {
 		//Weather is a list of WeatherDTO's
-		return isAString(getWeather().get(0).getDescription());
+		return isString(getWeather().get(0).getDescription());
 	}
 
 	public boolean isWeatherIconAString() {
 		//Weather is a list of WeatherDTO's
-		return isAString(getWeather().get(0).getIcon());
+		return isString(getWeather().get(0).getIcon());
 	}
 	//END OF WEATHER METHODS
 
@@ -214,7 +215,7 @@ public class ResponseDTO{
 	}
 
 	public boolean isBaseAString() {
-		return isAString(getBase());
+		return isString(getBase());
 	}
 
 	public boolean isTempADouble() {
@@ -234,21 +235,21 @@ public class ResponseDTO{
 	}
 
 	public boolean isPressureAnInt() {
-		return isAnInt(getMain().getPressure());
+		return isInteger(getMain().getPressure());
 	}
 
 	public boolean isHumidityAnInt() {
-		return isAnInt(getMain().getHumidity());
+		return isInteger(getMain().getHumidity());
 	}
 
 
 	public boolean isSeaLevelAnInt() {
 
-		return isAnInt(getMain().getSeaLevel());
+		return isInteger(getMain().getSeaLevel());
 	}
 
 	public boolean isGroundLevelAnInt() {
-		return isAnInt(getMain().getGrndLevel());
+		return isInteger(getMain().getGrndLevel());
 	}
 
 	public boolean isWindSpeedADouble() {
@@ -256,7 +257,7 @@ public class ResponseDTO{
 	}
 
 	public boolean isWindDegreeAnInt() {
-		return isAnInt(getWind().getDeg());
+		return isInteger(getWind().getDeg());
 	}
 
 	public boolean isWindGustIsADouble() {
@@ -264,6 +265,6 @@ public class ResponseDTO{
 	}
 
 	public boolean isCloudsAnInt() {
-		return isAnInt(getClouds().getAll());
+		return isInteger(getClouds().getAll());
 	}
 }
