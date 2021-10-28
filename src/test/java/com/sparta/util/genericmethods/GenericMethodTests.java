@@ -40,14 +40,21 @@ public class GenericMethodTests {
     @Nested
     @DisplayName("isInteger Tests")
     class isIntegerTests{
-        Integer aInteger = 7;
-        String aString = "A Test";
-        Double aDouble = 7.4312;
+        private int anInt = 5;
+        private Integer aInteger = 7;
+        private String aString = "A Test";
+        private Double aDouble = 7.4312;
 
         @Test
         @DisplayName("Given an integer type object return true")
         void givenIntegerClassReturnTrue(){
             Assertions.assertTrue(GenericMethods.isInteger(aInteger));
+        }
+
+        @Test
+        @DisplayName("Given an integer primitive type object return true")
+        void givenIntegerPrimitiveReturnTrue(){
+            Assertions.assertTrue(GenericMethods.isInteger(anInt));
         }
 
         @Test
@@ -73,14 +80,21 @@ public class GenericMethodTests {
     @Nested
     @DisplayName("isString Tests")
     class isStringTests{
-        Integer aInteger = 7;
-        String aString = "A Test";
-        Double aDouble = 7.4312;
+        private char aChar = 'a';
+        private Integer aInteger = 7;
+        private String aString = "A Test";
+        private Double aDouble = 7.4312;
 
         @Test
         @DisplayName("Given an string type object return true")
         void givenStringObjectReturnTrue(){
             Assertions.assertTrue(GenericMethods.isString(aString));
+        }
+
+        @Test
+        @DisplayName("Given a char return false")
+        void givenCharReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isString(aChar));
         }
 
         @Test
