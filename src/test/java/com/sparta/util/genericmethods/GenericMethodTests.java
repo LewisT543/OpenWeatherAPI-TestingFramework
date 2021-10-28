@@ -481,7 +481,7 @@ public class GenericMethodTests {
         @Test
         @DisplayName("Given an epoch return true if valid date")
         void givenEpochReturnTrueIfDateValid() {
-            Assertions.assertTrue(GenericMethods.epochDateIsValid(1643381695L));
+            Assertions.assertTrue(GenericMethods.epochDateIsValid(System.currentTimeMillis()/1000));
         }
 
         @DisplayName("Given an epoch return false if data is not valid")
