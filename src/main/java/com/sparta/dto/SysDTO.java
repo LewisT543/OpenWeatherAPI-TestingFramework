@@ -8,10 +8,10 @@ public class SysDTO {
 	private String country;
 
 	@JsonProperty("sunrise")
-	private Integer sunrise;
+	private Long sunrise;
 
 	@JsonProperty("sunset")
-	private Integer sunset;
+	private Long sunset;
 
 	@JsonProperty("id")
 	private Integer id;
@@ -26,11 +26,11 @@ public class SysDTO {
 		return country;
 	}
 
-	public Integer getSunrise(){
+	public Long getSunrise(){
 		return sunrise;
 	}
 
-	public Integer getSunset(){
+	public Long getSunset(){
 		return sunset;
 	}
 

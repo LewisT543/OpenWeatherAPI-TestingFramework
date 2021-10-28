@@ -22,7 +22,7 @@ public class ResponseDTO{
 	private SysDTO sysDTO;
 
 	@JsonProperty("dt")
-	private Integer dt;
+	private Long dt;
 
 	@JsonProperty("coord")
 	private CoordDTO coordDTO;
@@ -65,7 +65,7 @@ public class ResponseDTO{
 		return sysDTO;
 	}
 
-	public Integer getDt(){
+	public Long getDt(){
 		return dt;
 	}
 
@@ -115,4 +115,7 @@ public class ResponseDTO{
 				", \n\twindDTO=" + windDTO +
 				"\n}";
 	}
+
+
+
 }
