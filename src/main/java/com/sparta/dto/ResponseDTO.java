@@ -326,4 +326,12 @@ public class ResponseDTO{
 		return mainDTO.getTempMin() > 0;
 	}
 
+	public boolean isMaxTempGreaterThanZeroCelsius(){
+		return mainDTO.getTempMax() > -273;
+	}
+
+	public boolean isMinTempGreaterThanZeroCelsius(){
+		return mainDTO.getTempMin() > -273;
+	}
+
 }
