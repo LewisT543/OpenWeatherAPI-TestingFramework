@@ -323,40 +323,44 @@ public class ResponseDTO{
 		return mainDTO.getTempMax() > 0;
 	}
 
-	public boolean isMinTempGreaterThanZeroKelvin(){
+	public boolean isMinTempGreaterThanZeroKelvin() {
 		return mainDTO.getTempMin() > 0;
-
-	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100(){
-		return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0,100.0);
 	}
 
-	public boolean isMainHumidityGreaterThan0AndLessThan100(){
-		return GenericMethods.isBetweenXAndY(getMain().getHumidity().doubleValue(),0.0,100.0);
-	}
-
-	public boolean isCoordLatGreaterThanMinus90AndLessThan90(){
-		return GenericMethods.isBetweenXAndY(getCoord().getLat(),-90.0,90.0);
-	}
-
-	public boolean isCoordLonGreaterThanMinus180AndLessThan180(){
-		return GenericMethods.isBetweenXAndY(getCoord().getLon(),-180.0, 180.0);
-
-	}
-
-	public boolean isMaxTempGreaterThanZeroCelsius(){
+	public boolean isMaxTempGreaterThanZeroCelsius () {
 		return mainDTO.getTempMax() > -273;
 	}
 
-	public boolean isMinTempGreaterThanZeroCelsius(){
+	public boolean isMinTempGreaterThanZeroCelsius () {
 		return mainDTO.getTempMin() > -273;
 	}
 
-	public boolean isMaxTempGreaterThanZeroFahrenheit(){
+	public boolean isMaxTempGreaterThanZeroFahrenheit () {
 		return mainDTO.getTempMax() > -459.67;
 	}
 
-	public boolean isMinTempGreaterThanZeroFahrenheit(){
+	public boolean isMinTempGreaterThanZeroFahrenheit () {
 		return mainDTO.getTempMin() > -459.67;
 	}
+
+
+		public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100 () {
+			return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0, 100.0);
+		}
+
+		public boolean isMainHumidityGreaterThan0AndLessThan100 () {
+			return GenericMethods.isBetweenXAndY(getMain().getHumidity().doubleValue(), 0.0, 100.0);
+		}
+
+		public boolean isCoordLatGreaterThanMinus90AndLessThan90 () {
+			return GenericMethods.isBetweenXAndY(getCoord().getLat(), -90.0, 90.0);
+		}
+
+		public boolean isCoordLonGreaterThanMinus180AndLessThan180 () {
+			return GenericMethods.isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
+
+		}
+
+
 
 }
