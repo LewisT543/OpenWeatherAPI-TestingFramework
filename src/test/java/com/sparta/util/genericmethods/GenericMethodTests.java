@@ -387,19 +387,97 @@ public class GenericMethodTests {
         void givenDoubleObjectReturnFalse() {
             Assertions.assertFalse(GenericMethods.isInteger(aDouble));
         }
+    }
+    @Nested
+    @DisplayName("IsNotNull tests")
+    class IsNotNull{
+        @Test
+        @DisplayName("Given any String value, return true")
+        void givenStringValueReturnTrue(){
+            String testValue = "Hello";
+            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        }
+        @Test
+        @DisplayName("Given any Integer value, return true")
+        void givenIntegerValueReturnTrue(){
+            Integer testValue = 1123;
+            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        }
+        @Test
+        @DisplayName("Given any Double value, return true")
+        void givenDoubleValueReturnTrue(){
+            Double testValue = 1123.021;
+            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        }
+        @Test
+        @DisplayName("Given no value, return false")
+        void givenNoValueReturnFalse(){
+            String testValue = null;
+            Assertions.assertFalse(GenericMethods.IsNotNull(testValue));
+        }
+    }
+    @Nested
+    @DisplayName("BetweenXAndY tests")
+    class BetweenXAndY{
+        @Test
+        @DisplayName("Given value=0, x=0, y=100, return true")
+        void given0And0And100ReturnTrue(){
+            double testValue = 0;
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+        }
+        @Test
+        @DisplayName("Given value=0, x=0, y=100, return true")
+        void given100And0And100ReturnTrue(){
+            double testValue = 100;
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+        }
+        @Test
+        @DisplayName("Given value=50, x=0, y=100, return true")
+        void given50And0And100ReturnTrue(){
+            Double testValue = 50.0;
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+        }
 
+        @Test
+        @DisplayName("Given value=-12, x=0, y=100, return false")
+        void givenMinus12And0And100ReturnTrue(){
+            Double testValue = -12.0;
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+        }
+
+        @Test
+        @DisplayName("Given value=-null, x=0, y=100, return false")
+        void givenNullAnd0And100ReturnTrue(){
+            Double testValue = null;
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+        }
+        @Test
+        @DisplayName("Given value=-null, x=0, y=100, return false")
+        void given0AndNullAnd100ReturnTrue(){
+            Double testValue = 0.0;
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,null,100.0));
+        }
+        @Test
+        @DisplayName("Given value=-null, x=0, y=100, return false")
+        void given0And0AndNullReturnTrue(){
+            Double testValue = 0.0;
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,null));
+        }
+    }
+  
+    @AfterEach
+    void tearDown (TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName() + " : END");
     }
 
-        @AfterEach
-        void tearDown(TestInfo testInfo) {
-            System.out.println(testInfo.getDisplayName() + " : END");
-        }
+    @AfterAll
+    static void tearDownAll(TestInfo testInfo) {
+        System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
+    }
 
-        @AfterAll
-        static void tearDownAll(TestInfo testInfo) {
-            System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
 
-        }
+
 
 
 }
+
