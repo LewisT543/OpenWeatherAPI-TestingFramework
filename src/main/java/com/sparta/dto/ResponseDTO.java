@@ -378,4 +378,24 @@ public class ResponseDTO{
 		return getMain().getFeelsLike() >= -459.67;
 	}
 
+	public boolean isPressureGreaterOrEqualToZero() {
+		return getMain().getPressure() >= 0;
+	}
+
+	public boolean isGustSpeedGreaterOrEqualToZero() {
+		return getWind().getGust() >= 0;
+	}
+
+	public boolean isGroundPressureGreaterOrEqualToZero() {
+		return getMain().getGrndLevel() >= 0;
+	}
+
+	public boolean isSnowVolumeInLast1HGreaterOrEqualToZero() {
+		return getSnow().getOneHour() >= 0;
+	}
+
+	public boolean isSnowVolumeInLast3HGreaterOrEqualToZero() {
+		return getSnow().getThreeHour() >= 0;
+	}
+
 }
