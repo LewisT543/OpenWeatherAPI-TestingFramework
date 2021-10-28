@@ -403,3 +403,64 @@ public class GenericMethodTests {
 
 
 }
+    @Test
+    @DisplayName("Given any value, return true")
+    void givenValueReturnTrue(){
+        String testValue = "Hello";
+        Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+    }
+    @Test
+    @DisplayName("Given no value, return false")
+    void givenNoValueReturnFalse(){
+        String testValue = null;
+        Assertions.assertFalse(GenericMethods.IsNotNull(testValue));
+    }
+    @Test
+    @DisplayName("Given value=0, x=0, y=100, return true")
+    void given0And0And100ReturnTrue(){
+        double testValue = 0;
+        Assertions.assertTrue(GenericMethods.isBetween0And100(testValue,0.0,100.0));
+    }
+    @Test
+    @DisplayName("Given value=0, x=0, y=100, return true")
+    void given100And0And100ReturnTrue(){
+        double testValue = 100;
+        Assertions.assertTrue(GenericMethods.isBetween0And100(testValue,0.0,100.0));
+    }
+    @Test
+    @DisplayName("Given value=50, x=0, y=100, return true")
+    void given50And0And100ReturnTrue(){
+        Double testValue = 50.0;
+        Assertions.assertTrue(GenericMethods.isBetween0And100(testValue,0.0,100.0));
+    }
+
+    @Test
+    @DisplayName("Given value=-12, x=0, y=100, return false")
+    void givenMinus12And0And100ReturnTrue(){
+        Double testValue = -12.0;
+        Assertions.assertFalse(GenericMethods.isBetween0And100(testValue,0.0,100.0));
+    }
+
+    @Test
+    @DisplayName("Given value=-null, x=0, y=100, return false")
+    void givenNullAnd0And100ReturnTrue(){
+        Double testValue = null;
+        Assertions.assertFalse(GenericMethods.isBetween0And100(testValue,0.0,100.0));
+    }
+    @Test
+    @DisplayName("Given value=-null, x=0, y=100, return false")
+    void given0AndNullAnd100ReturnTrue(){
+        Double testValue = 0.0;
+        Assertions.assertFalse(GenericMethods.isBetween0And100(testValue,null,100.0));
+    }
+    @Test
+    @DisplayName("Given value=-null, x=0, y=100, return false")
+    void given0And0AndNullReturnTrue(){
+        Double testValue = 0.0;
+        Assertions.assertFalse(GenericMethods.isBetween0And100(testValue,0.0,null));
+    }
+
+
+
+
+}

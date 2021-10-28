@@ -91,6 +91,17 @@ public class GenericMethods {
         return isGreaterThanOrEqualToZero(input);
     }
 
+    /**
+     * @deprecated dan rewrote his method to implement this method's functionality
+     */
+    @Deprecated
+    public static boolean isGreaterThan(Double num, Double field) {
+        if (num == null || field == null) {
+            throw new NullPointerException("bro why'd you give me a null value. why'd you do this to me man. " +
+                    "i trusted you bro. how could you");
+        }
+        return field > num;
+    }
 
     public static boolean isADouble(Object field) {
         if(field instanceof Double) {
@@ -109,12 +120,16 @@ public class GenericMethods {
         return object instanceof String;
     }
 
-    public boolean IsNotNull(Object o){
+    public static boolean IsNotNull(Object o){
         return o != null;
     }
 
-    public boolean isBetween0And100(double value){
-        return value>= 0 && value<=100;
+    public static boolean isBetween0And100(Double value, Double x, Double y){
+        try {
+            return value>= x && value<=y;
+        } catch (NullPointerException npe){
+            return false;
+        }
     }
 
 }
