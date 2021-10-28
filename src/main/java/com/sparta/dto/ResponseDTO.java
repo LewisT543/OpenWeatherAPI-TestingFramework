@@ -214,7 +214,7 @@ public class ResponseDTO{
 	}
 
 	public boolean isSysMessageDouble(){
-		return isADouble(getSys().getMessage());
+		return isDouble(getSys().getMessage());
 	}
 
 	public boolean isDtALong(){
@@ -222,19 +222,19 @@ public class ResponseDTO{
 	}
 
 	public boolean isSnowH1Double(){
-		return isADouble(getSnow().getOneHour());
+		return isDouble(getSnow().getOneHour());
 	}
 
 	public boolean isSnowH3Double(){
-		return isADouble(getSnow().getThreeHour());
+		return isDouble(getSnow().getThreeHour());
 	}
 
 	public boolean isRainH1Double(){
-		return isADouble(getRain().getOneHour());
+		return isDouble(getRain().getOneHour());
 	}
 
 	public boolean isRainH3Double(){
-		return isADouble(getRain().getThreeHour());
+		return isDouble(getRain().getThreeHour());
 	}
 	
 	//WEATHER METHODS NEEDS TO BE CHECKED
@@ -259,10 +259,10 @@ public class ResponseDTO{
 	//END OF WEATHER METHODS
 
 	public boolean isCoordLonADouble() {
-		return isADouble(getCoord().getLon());
+		return isDouble(getCoord().getLon());
 	}
 	public boolean isCoordLatADouble() {
-		return isADouble(getCoord().getLat());
+		return isDouble(getCoord().getLat());
 	}
 
 	public boolean isBaseAString() {
@@ -270,19 +270,19 @@ public class ResponseDTO{
 	}
 
 	public boolean isTempADouble() {
-		return isADouble(getMain().getTemp());
+		return isDouble(getMain().getTemp());
 	}
 
 	public boolean isFeelsLikeADouble() {
-		return isADouble(getMain().getFeelsLike());
+		return isDouble(getMain().getFeelsLike());
 	}
 
 	public boolean isTempMinADouble() {
-		return isADouble(getMain().getTempMin());
+		return isDouble(getMain().getTempMin());
 	}
 
 	public boolean isTempMaxADouble() {
-		return isADouble(getMain().getTempMax());
+		return isDouble(getMain().getTempMax());
 	}
 
 	public boolean isPressureAnInt() {
@@ -304,15 +304,15 @@ public class ResponseDTO{
 	}
 
 	public boolean isWindSpeedADouble() {
-		return isADouble(getWind().getSpeed());
+		return isDouble(getWind().getSpeed());
 	}
 
 	public boolean isWindDegreeAnInt() {
 		return isInteger(getWind().getDeg());
 	}
 
-	public boolean isWindGustIsADouble() {
-		return isADouble(getWind().getGust());
+	public boolean isWindGustisDouble() {
+		return isDouble(getWind().getGust());
 	}
 
 	public boolean isCloudsAnInt() {
