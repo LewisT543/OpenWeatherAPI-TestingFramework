@@ -9,7 +9,6 @@ public class ResponseDTO{
 	@JsonProperty("visibility")
 	private Integer visibility;
 
-
 	@JsonProperty("timezone")
 	private Integer timezone;
 
@@ -267,15 +266,4 @@ public class ResponseDTO{
 	public boolean isCloudsAnInt() {
 		return isAnInt(getClouds().getAll());
 	}
-
-
-
-
-
-
-
-
-
-
-
 }
