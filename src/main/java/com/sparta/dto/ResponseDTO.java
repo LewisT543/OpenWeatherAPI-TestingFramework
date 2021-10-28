@@ -318,7 +318,6 @@ public class ResponseDTO{
 		return isInteger(getClouds().getAll());
 	}
 
-
 	public boolean isMaxTempGreaterThanZeroKelvin(){
 		return mainDTO.getTempMax() > 0;
 	}
@@ -448,6 +447,16 @@ public class ResponseDTO{
 		return GenericMethods.isNotNull(sysDTO.getSunrise());
 	}
 
+	public boolean isSunsetTimeLong(){
+		return GenericMethods.isLong(sysDTO.getSunset());
+	}
+
+	public boolean isSunriseTimeLong(){
+		return GenericMethods.isLong(sysDTO.getSunrise());
+	}
+
+	public boolean isSunsetTimeValid(){
+
 	public boolean isLongSunsetTime(){
 		return GenericMethods.isLong(sysDTO.getSunset());
 	}
@@ -467,11 +476,13 @@ public class ResponseDTO{
 	}
 
 	// What if sunrise/sunset don't occur in the same day?
+
 	public boolean isCorrectSunsetData(){
 		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
 	}
 
 	public boolean isCorrectSunriseData(){
+
 		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
 	}
 }
