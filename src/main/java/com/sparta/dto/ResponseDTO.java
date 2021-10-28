@@ -366,4 +366,16 @@ public class ResponseDTO{
 		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-459.67);
 	}
 
+	public boolean isFeelsLikeStandardGreaterThanMin(){
+		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
+	}
+
+	public boolean isFeelsLikeMetricGreaterThanMin(){
+		return getMain().getFeelsLike() >= -273;
+	}
+
+	public boolean isFeelsLikeImperialGreaterThanMin(){
+		return getMain().getFeelsLike() >= -459.67;
+	}
+
 }
