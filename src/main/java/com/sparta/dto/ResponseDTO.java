@@ -356,5 +356,14 @@ public class ResponseDTO{
 		return cityLatIsCorrect(name, coordDTO.getLat());
 	}
 
+	public boolean isTempGreaterThan0Kelvin(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),0.0);
+	}
+	public boolean isTempGreaterThanMinus273Celcius(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-273.0);
+	}
+	public boolean isTempGreaterThanMinus459Fahrenheit(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-459.67);
+	}
 
 }
