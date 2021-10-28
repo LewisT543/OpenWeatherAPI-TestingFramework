@@ -10,7 +10,12 @@ public class GenericMethods {
         return input == null|| input >= 0;
     }
 
+    @Deprecated
     public static boolean isGreaterThan(Double num, Double field) {
+        if (num == null || field == null) {
+            throw new NullPointerException("bro why'd you give me a null value. why'd you do this to me man. " +
+                    "i trusted you bro. how could you");
+        }
         return field > num;
     }
 
