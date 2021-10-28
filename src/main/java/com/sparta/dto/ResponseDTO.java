@@ -184,7 +184,6 @@ public class ResponseDTO{
 	}
 
 
-
 	public boolean isCodInteger(){
 		return isInteger(getCod());
 	}
@@ -319,6 +318,127 @@ public class ResponseDTO{
 		return isInteger(getClouds().getAll());
 	}
 
+	public boolean isMaxTempGreaterThanZeroKelvin(){
+		return mainDTO.getTempMax() > 0;
+	}
+
+	public boolean isMinTempGreaterThanZeroKelvin() {
+		return mainDTO.getTempMin() > 0;
+
+	}
+
+	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100(){
+		return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0,100.0);
+	}
+
+	public boolean isMaxTempGreaterThanZeroCelsius () {
+		return mainDTO.getTempMax() > -273;
+	}
+
+	public boolean isMinTempGreaterThanZeroCelsius () {
+		return mainDTO.getTempMin() > -273;
+	}
+
+	public boolean isMaxTempGreaterThanZeroFahrenheit () {
+		return mainDTO.getTempMax() > -459.67;
+	}
+
+	public boolean isMinTempGreaterThanZeroFahrenheit () {
+		return mainDTO.getTempMin() > -459.67;
+	}
+
+	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100 () {
+			return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0, 100.0);
+	}
+
+	public boolean isMainHumidityGreaterThan0AndLessThan100 () {
+			return GenericMethods.isBetweenXAndY(getMain().getHumidity().doubleValue(), 0.0, 100.0);
+	}
+
+	public boolean isCoordLatGreaterThanMinus90AndLessThan90 () {
+			return GenericMethods.isBetweenXAndY(getCoord().getLat(), -90.0, 90.0);
+	}
+
+	public boolean isCoordLonGreaterThanMinus180AndLessThan180 () {
+			return GenericMethods.isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
+	}
+
+	public boolean isCorrectCityID() {
+		return cityIdIsCorrect(name, sysDTO.getId());
+	}
+
+	public boolean isCorrectCityLon() {
+		return cityLonIsCorrect(name, coordDTO.getLon());
+	}
+
+	public boolean isCorrectCityLat() {
+		return cityLatIsCorrect(name, coordDTO.getLat());
+	}
+
+	public boolean isTempGreaterThan0Kelvin(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),0.0);
+	}
+  
+	public boolean isTempGreaterThanMinus273Celcius(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-273.0);
+  }
+  
+	public boolean isTempGreaterThanMinus459Fahrenheit(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-459.67);
+	}
+  
+	public boolean isFeelsLikeStandardGreaterThanMin(){
+		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
+	}
+
+	public boolean isFeelsLikeMetricGreaterThanMin(){
+		return isGreaterThanOrEqualTo(getMain().getFeelsLike(),-273.0);
+	}
+
+	public boolean isFeelsLikeImperialGreaterThanMin(){
+		return isGreaterThanOrEqualTo(getMain().getFeelsLike(),-459.67);
+	}
+
+	public boolean isRainH1GreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getRain().getOneHour());
+	}
+
+	public boolean isRainH3GreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getRain().getThreeHour());
+	}
+
+	public boolean isSeaLevelGreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getMain().getSeaLevel());
+	}
+
+	public boolean isWindSpeedGreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getWind().getSpeed());
+	}
+
+	public boolean isMinTempLessThanMaxTempKelvin() {
+		return (getMain().getTempMin() <= getMain().getTempMax());
+	}
+
+	public boolean isPressureGreaterOrEqualToZero() {
+		return GenericMethods.isGreaterThanOrEqualToZero(getMain().getPressure());
+	}
+
+	public boolean isGustGreaterOrEqualToZero() {
+		return GenericMethods.isGreaterThanOrEqualToZero(getWind().getGust());
+	}
+
+	public boolean isGroundPressureGreaterOrEqualToZero() {
+		return GenericMethods.isGreaterThanOrEqualToZero(getMain().getGrndLevel());
+	}
+
+	public boolean isSnowVolumeInLast1HGreaterOrEqualToZero() {
+		return GenericMethods.isGreaterThanOrEqualToZero(getSnow().getOneHour());
+	}
+
+	public boolean isSnowVolumeInLast3HGreaterOrEqualToZero() {
+		return GenericMethods.isGreaterThanOrEqualToZero(getSnow().getThreeHour());
+	}
+
 	public boolean isSunsetTime(){
 		return GenericMethods.isNotNull(sysDTO.getSunset());
 	}
@@ -336,21 +456,33 @@ public class ResponseDTO{
 	}
 
 	public boolean isSunsetTimeValid(){
+
+	public boolean isLongSunsetTime(){
+		return GenericMethods.isLong(sysDTO.getSunset());
+	}
+
+	public boolean isLongSunriseTime(){
+		return GenericMethods.isLong(sysDTO.getSunrise());
+	}
+
+	public boolean isValidSunsetTime(){
 		return GenericMethods.epochDateIsValid(sysDTO.getSunset()) &&
 				GenericMethods.epochIsTenDigits(sysDTO.getSunset());
 	}
 
-	public boolean isSunriseTimeValid(){
+	public boolean isValidSunriseTime(){
 		return GenericMethods.epochDateIsValid(sysDTO.getSunrise()) &&
 				GenericMethods.epochIsTenDigits(sysDTO.getSunrise());
 	}
 
 	// What if sunrise/sunset don't occur in the same day?
-	public boolean isSunsetCorrect(){
+
+	public boolean isCorrectSunsetData(){
 		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
 	}
 
-	public boolean isSunriseCorrect(){
+	public boolean isCorrectSunriseData(){
+
 		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
 	}
 }
