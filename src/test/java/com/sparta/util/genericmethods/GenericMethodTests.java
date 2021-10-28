@@ -388,6 +388,54 @@ public class GenericMethodTests {
             Assertions.assertFalse(GenericMethods.isInteger(aDouble));
         }
     }
+
+    @Nested
+    @DisplayName("isLong Tests")
+    class isLongTests{
+        private Long aLong = 3456789L;
+        private int anInt = 5;
+        private Integer aInteger = 7;
+        private String aString = "A Test";
+        private Double aDouble = 7.4312;
+
+
+        @Test
+        @DisplayName("Given an integer type object return true")
+        void givenIntegerClassReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aInteger));
+        }
+
+        @Test
+        @DisplayName("Given a long type object return true")
+        void givenLongClassReturnTrue(){
+            Assertions.assertTrue(GenericMethods.isLong(aLong));
+        }
+
+        @Test
+        @DisplayName("Given an integer primitive type object return true")
+        void givenIntegerPrimitiveReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isLong(anInt));
+        }
+
+        @Test
+        @DisplayName("Given null return false")
+        void givenNullReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(null));
+        }
+
+        @Test
+        @DisplayName("Given a string object return false")
+        void givenStringObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aString));
+        }
+
+        @Test
+        @DisplayName("Given a double object return false")
+        void givenDoubleObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aDouble));
+        }
+    }
+
     @Nested
     @DisplayName("IsNotNull tests")
     class IsNotNull{

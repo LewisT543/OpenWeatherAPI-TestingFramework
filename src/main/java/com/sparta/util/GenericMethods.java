@@ -120,6 +120,10 @@ public class GenericMethods {
         return object instanceof String;
     }
 
+    public static boolean isLong(Object object){
+        return object instanceof Long;
+    }
+
     public static boolean IsNotNull(Object o){
         return o != null;
     }
