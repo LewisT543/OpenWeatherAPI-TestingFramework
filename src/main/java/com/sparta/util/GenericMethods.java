@@ -10,6 +10,9 @@ public class GenericMethods {
         return input == null|| input >= 0;
     }
 
+    /**
+     * @deprecated dan rewrote his method to implement this method's functionality
+     */
     @Deprecated
     public static boolean isGreaterThan(Double num, Double field) {
         if (num == null || field == null) {
