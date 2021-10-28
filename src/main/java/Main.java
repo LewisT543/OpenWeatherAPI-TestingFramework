@@ -15,6 +15,5 @@ public class Main {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-
     }
 }
