@@ -37,5 +37,70 @@ public class GenericMethodTests {
 
     }
 
+    @Nested
+    @DisplayName("isInteger Tests")
+    class isIntegerTests{
+        Integer aInteger = 7;
+        String aString = "A Test";
+        Double aDouble = 7.4312;
+
+        @Test
+        @DisplayName("Given an integer type object return true")
+        void givenIntegerClassReturnTrue(){
+            Assertions.assertTrue(GenericMethods.isInteger(aInteger));
+        }
+
+        @Test
+        @DisplayName("Given null return false")
+        void givenNullReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isInteger(null));
+        }
+
+        @Test
+        @DisplayName("Given a string object return false")
+        void givenStringObjectReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isInteger(aString));
+        }
+
+        @Test
+        @DisplayName("Given a double object return false")
+        void givenDoubleObjectReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isInteger(aDouble));
+        }
+
+    }
+
+    @Nested
+    @DisplayName("isString Tests")
+    class isStringTests{
+        Integer aInteger = 7;
+        String aString = "A Test";
+        Double aDouble = 7.4312;
+
+        @Test
+        @DisplayName("Given an string type object return true")
+        void givenStringObjectReturnTrue(){
+            Assertions.assertTrue(GenericMethods.isString(aString));
+        }
+
+        @Test
+        @DisplayName("Given null return false")
+        void givenNullReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isString(null));
+        }
+
+        @Test
+        @DisplayName("Given an integer object return false")
+        void givenIntegerObjectReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isString(aInteger));
+        }
+
+        @Test
+        @DisplayName("Given an double object return false")
+        void givenDoubleObjectReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isString(aDouble));
+        }
+    }
+
 
 }
