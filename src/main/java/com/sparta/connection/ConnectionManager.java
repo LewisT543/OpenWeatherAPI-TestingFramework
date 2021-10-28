@@ -23,6 +23,8 @@ public class ConnectionManager {
         return params;
     }
 
+    //TODO: Null check
+
     /***
      * Builds the /box endpoint of the API. bbox is a required parameter for this endpoint.
      * lang and units are optional
@@ -34,7 +36,8 @@ public class ConnectionManager {
         stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_URL).append("/box/city?");
 
-        if (!params.get("bbox").isEmpty() && checkBBox(params.get("bbox"))) {
+        if ( (params.get("key") != null && !params.get("bbox").isEmpty()) &&
+                (params.get("bbox") != null && checkBBox(params.get("bbox")))) {
             params.forEach((k,v) -> {
                 if (!v.isEmpty()) {
                     stringBuilder.append(k + "=" + v + "&");
@@ -69,7 +72,8 @@ public class ConnectionManager {
         stringBuilder.append(BASE_URL).append("/find?");
 
         //check to see if required params are in hashmap
-        if (!params.get("lat").isEmpty() && !params.get("lon").isEmpty()) {
+        if ((params.get("lat") != null && !params.get("lat").isEmpty())
+                && (params.get("lon") != null && !params.get("lon").isEmpty())) {
 
             params.forEach((k, v) -> {
                 if (!v.isEmpty()) {
@@ -97,7 +101,7 @@ public class ConnectionManager {
         stringBuilder.append(BASE_URL).append("/weather?");
 
         //check to see if required params are in hashmap
-        if (!params.get("q").isEmpty()) {
+        if (params.get("q") != null && !params.get("q").isEmpty()) {
             params.forEach((k,v) -> {
                 if (!v.isEmpty()) {
                     stringBuilder.append(k + "=" + v + "&");
