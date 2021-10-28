@@ -8,6 +8,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
+
+import static org.apache.commons.lang3.time.DateUtils.isSameDay;
 
 public class GenericMethods {
 
@@ -25,12 +28,8 @@ public class GenericMethods {
     public static boolean cityIdIsCorrect(String cityName, int ID) {
         JsonNode cityList = loadCityList();
         for (JsonNode city: cityList) {
-            if (city.get("name").textValue().equals(cityName)) {
-                if (city.get("id").intValue() == ID) {
-                    return true;
-                } else {
-                    return false;
-                }
+            if(city.get("name").textValue().equals(cityName)) {
+                return city.get("id").intValue() == ID;
             }
         }
         return false;
@@ -41,11 +40,7 @@ public class GenericMethods {
         for (JsonNode city: cityList) {
             if (city.get("name").textValue().equals(cityName)) {
                 JsonNode coords = city.get("coord");
-                if (coords.get("lon").doubleValue() == lon) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return coords.get("lon").doubleValue() == lon;
             }
         }
         return false;
@@ -56,11 +51,7 @@ public class GenericMethods {
         for (JsonNode city: cityList) {
             if (city.get("name").textValue().equals(cityName)) {
                 JsonNode coords = city.get("coord");
-                if (coords.get("lat").doubleValue() == lat) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return coords.get("lat").doubleValue() == lat;
             }
         }
         return false;
@@ -91,13 +82,8 @@ public class GenericMethods {
     }
 
 
-    public static boolean isADouble(Object field) {
-        if(field instanceof Double) {
-        //if (field.getClass() == Double.class) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean isDouble(Object field) {
+        return field instanceof Double;
     }
 
     public static boolean isInteger(Object object) {
@@ -107,8 +93,13 @@ public class GenericMethods {
     public static boolean isString(Object object){
         return object instanceof String;
     }
-    
-    public static boolean IsNotNull(Object o){
+
+    public static boolean isLong(Object object){
+        return object instanceof Long;
+    }
+
+    public static boolean isNotNull(Object o){
+
         return o != null;
     }
 
@@ -118,6 +109,22 @@ public class GenericMethods {
         } catch (NullPointerException npe){
             return false;
         }
+    }
+
+    public static boolean epochDateIsValid(Long epoch){
+        return System.currentTimeMillis()/1000 >= epoch;
+    }
+
+    public static boolean epochIsTenDigits(Long epoch){
+        return String.valueOf(epoch).length() == 10;
+    }
+
+    public static Date getHumanDate(Long epochTime) {
+        return new Date(epochTime);
+    }
+
+    public static boolean getDateComparison(Long epoch1, Long epoch2) {
+        return isSameDay(getHumanDate(epoch1), getHumanDate(epoch2));
     }
 
 }

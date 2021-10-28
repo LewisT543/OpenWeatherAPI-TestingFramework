@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -169,49 +168,49 @@ public class GenericMethodTests {
         @DisplayName("Check if Double with value is a Double")
         void checkIfDoubleWithValueIsADouble() {
             Double input = Double.valueOf(0);
-            Assertions.assertTrue(GenericMethods.isADouble(input));
+            Assertions.assertTrue(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Double without value is a Double")
         void checkIfDoubleWithoutValueIsADouble() {
             Double input = null;
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if primitive double is a Double")
         void checkIfPrimitiveDoubleIsADouble() {
             double input = 0;
-            Assertions.assertTrue(GenericMethods.isADouble(input));
+            Assertions.assertTrue(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if primitive int is a Double")
         void checkIfPrimitiveIntIsADouble() {
             int input = 0;
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Object is a Double")
         void checkIfObjectIsADouble() {
             Object input = new Object();
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if String is a Double")
         void checkIfStringIsADouble() {
             String input = "sus";
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Double array is a Double")
         void checkIfDoubleArrayIsADouble() {
             Double[] input = new Double[]{};
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
     }
 
@@ -309,49 +308,50 @@ public class GenericMethodTests {
             assertFalse(GenericMethods.cityLatIsCorrect("Incorrect", 35.479167));
         }
     }
-        @Nested
-        @DisplayName("isString Tests")
-        class isStringTests{
-            private char aChar = 'a';
-            private Integer aInteger = 7;
-            private String aString = "A Test";
-            private Double aDouble = 7.4312;
 
-            @Test
-            @DisplayName("Given an string type object return true")
-            void givenStringObjectReturnTrue() {
-                Assertions.assertTrue(GenericMethods.isString(aString));
-            }
+    @Nested
+    @DisplayName("isString Tests")
+    class isStringTests {
+        private char aChar = 'a';
+        private Integer aInteger = 7;
+        private String aString = "A Test";
+        private Double aDouble = 7.4312;
 
-            @Test
-            @DisplayName("Given null return false")
-            void givenNullReturnFalse() {
-                Assertions.assertFalse(GenericMethods.isString(null));
-            }
-
-            @Test
-            @DisplayName("Given a char return false")
-            void givenCharReturnFalse(){
-                Assertions.assertFalse(GenericMethods.isString(aChar));
-            }
-
-
-            @Test
-            @DisplayName("Given an integer object return false")
-            void givenIntegerObjectReturnFalse() {
-                Assertions.assertFalse(GenericMethods.isString(aInteger));
-            }
-
-            @Test
-            @DisplayName("Given an double object return false")
-            void givenDoubleObjectReturnFalse() {
-                Assertions.assertFalse(GenericMethods.isString(aDouble));
-            }
+        @Test
+        @DisplayName("Given an string type object return true")
+        void givenStringObjectReturnTrue() {
+            Assertions.assertTrue(GenericMethods.isString(aString));
         }
+
+        @Test
+        @DisplayName("Given null return false")
+        void givenNullReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isString(null));
+        }
+
+        @Test
+        @DisplayName("Given a char return false")
+        void givenCharReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isString(aChar));
+        }
+
+
+        @Test
+        @DisplayName("Given an integer object return false")
+        void givenIntegerObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isString(aInteger));
+        }
+
+        @Test
+        @DisplayName("Given an double object return false")
+        void givenDoubleObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isString(aDouble));
+        }
+    }
 
     @Nested
     @DisplayName("isInteger Tests")
-    class isIntegerTests{
+    class isIntegerTests {
         private int anInt = 5;
         private Integer aInteger = 7;
         private String aString = "A Test";
@@ -366,7 +366,7 @@ public class GenericMethodTests {
 
         @Test
         @DisplayName("Given an integer primitive type object return true")
-        void givenIntegerPrimitiveReturnTrue(){
+        void givenIntegerPrimitiveReturnTrue() {
             Assertions.assertTrue(GenericMethods.isInteger(anInt));
         }
 
@@ -388,85 +388,184 @@ public class GenericMethodTests {
             Assertions.assertFalse(GenericMethods.isInteger(aDouble));
         }
     }
+
+
     @Nested
-    @DisplayName("IsNotNull tests")
-    class IsNotNull{
+    @DisplayName("isLong Tests")
+    class isLongTests{
+        private Long aLong = 3456789L;
+        private int anInt = 5;
+        private Integer aInteger = 7;
+        private String aString = "A Test";
+        private Double aDouble = 7.4312;
+
+
         @Test
-        @DisplayName("Given any String value, return true")
-        void givenStringValueReturnTrue(){
-            String testValue = "Hello";
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        @DisplayName("Given an integer type object return true")
+        void givenIntegerClassReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aInteger));
         }
+
         @Test
-        @DisplayName("Given any Integer value, return true")
-        void givenIntegerValueReturnTrue(){
-            Integer testValue = 1123;
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        @DisplayName("Given a long type object return true")
+        void givenLongClassReturnTrue(){
+            Assertions.assertTrue(GenericMethods.isLong(aLong));
         }
+
         @Test
-        @DisplayName("Given any Double value, return true")
-        void givenDoubleValueReturnTrue(){
-            Double testValue = 1123.021;
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+        @DisplayName("Given an integer primitive type object return true")
+        void givenIntegerPrimitiveReturnFalse(){
+            Assertions.assertFalse(GenericMethods.isLong(anInt));
         }
+
         @Test
-        @DisplayName("Given no value, return false")
-        void givenNoValueReturnFalse(){
-            String testValue = null;
-            Assertions.assertFalse(GenericMethods.IsNotNull(testValue));
+        @DisplayName("Given null return false")
+        void givenNullReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(null));
+        }
+
+        @Test
+        @DisplayName("Given a string object return false")
+        void givenStringObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aString));
+        }
+
+        @Test
+        @DisplayName("Given a double object return false")
+        void givenDoubleObjectReturnFalse() {
+            Assertions.assertFalse(GenericMethods.isLong(aDouble));
         }
     }
+
+
+    @Nested
+    @DisplayName("IsNotNull tests")
+    class IsNotNull {
+        @Test
+        @DisplayName("Given any String value, return true")
+        void givenStringValueReturnTrue() {
+            String testValue = "Hello";
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
+        }
+
+        @Test
+        @DisplayName("Given any Integer value, return true")
+        void givenIntegerValueReturnTrue() {
+            Integer testValue = 1123;
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
+        }
+
+        @Test
+        @DisplayName("Given any Double value, return true")
+        void givenDoubleValueReturnTrue() {
+            Double testValue = 1123.021;
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
+        }
+
+        @Test
+        @DisplayName("Given no value, return false")
+        void givenNoValueReturnFalse() {
+            String testValue = null;
+            Assertions.assertFalse(GenericMethods.isNotNull(testValue));
+        }
+    }
+
     @Nested
     @DisplayName("BetweenXAndY tests")
-    class BetweenXAndY{
+    class BetweenXAndY {
         @Test
         @DisplayName("Given value=0, x=0, y=100, return true")
-        void given0And0And100ReturnTrue(){
+        void given0And0And100ReturnTrue() {
             double testValue = 0;
-            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue, 0.0, 100.0));
         }
+
         @Test
         @DisplayName("Given value=0, x=0, y=100, return true")
-        void given100And0And100ReturnTrue(){
+        void given100And0And100ReturnTrue() {
             double testValue = 100;
-            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue, 0.0, 100.0));
         }
+
         @Test
         @DisplayName("Given value=50, x=0, y=100, return true")
-        void given50And0And100ReturnTrue(){
+        void given50And0And100ReturnTrue() {
             Double testValue = 50.0;
-            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+            Assertions.assertTrue(GenericMethods.isBetweenXAndY(testValue, 0.0, 100.0));
         }
 
         @Test
         @DisplayName("Given value=-12, x=0, y=100, return false")
-        void givenMinus12And0And100ReturnTrue(){
+        void givenMinus12And0And100ReturnTrue() {
             Double testValue = -12.0;
-            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue, 0.0, 100.0));
         }
 
         @Test
         @DisplayName("Given value=-null, x=0, y=100, return false")
-        void givenNullAnd0And100ReturnTrue(){
+        void givenNullAnd0And100ReturnTrue() {
             Double testValue = null;
-            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,100.0));
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue, 0.0, 100.0));
         }
+
         @Test
         @DisplayName("Given value=-null, x=0, y=100, return false")
-        void given0AndNullAnd100ReturnTrue(){
+        void given0AndNullAnd100ReturnTrue() {
             Double testValue = 0.0;
-            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,null,100.0));
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue, null, 100.0));
         }
+
         @Test
         @DisplayName("Given value=-null, x=0, y=100, return false")
-        void given0And0AndNullReturnTrue(){
+        void given0And0AndNullReturnTrue() {
             Double testValue = 0.0;
-            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,null));
+            Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue, 0.0, null));
         }
     }
-  
+
+    @Nested
+    @DisplayName("Epoch tests")
+    class EpochTests {
+        @Test
+        @DisplayName("Given an epoch return true if valid date")
+        void givenEpochReturnTrueIfDateValid() {
+            Assertions.assertTrue(GenericMethods.epochDateIsValid(System.currentTimeMillis()/1000));
+        }
+
+        @DisplayName("Given an epoch return false if data is not valid")
+        void givenEpochReturnFalseIfDataIsNotValid() {
+            Assertions.assertFalse(GenericMethods.epochDateIsValid(1726572947L));
+        }
+
+
+        @Test
+        @DisplayName("Given an epoch return true if it is 10 digits")
+        void givenEpochReturnTrueIfTenDigits() {
+            Assertions.assertTrue(GenericMethods.epochIsTenDigits(1026572947L));
+        }
+
+        @Test
+        @DisplayName("Given an epoch return false if it is not 10 digits")
+        void givenEpochReturnFalseIfNotTenDigits() {
+            Assertions.assertFalse(GenericMethods.epochIsTenDigits(172947L));
+        }
+
+
+        @Test
+        @DisplayName("Given two epochs return true if same day")
+        void givenTwoEpochsReturnTrueIfSameDay() {
+            Assertions.assertTrue(GenericMethods.getDateComparison(1635403619L,1635439282L));
+        }
+
+        @Test
+        @DisplayName("Given two epochs return false if different day")
+        void givenTwoEpochsReturnFalseIfDifferentDay() {
+            Assertions.assertFalse(GenericMethods.getDateComparison(1635403619L,1026572947L));
+        }
+    }
+
     @AfterEach
-    void tearDown (TestInfo testInfo) {
+    void tearDown(TestInfo testInfo) {
         System.out.println(testInfo.getDisplayName() + " : END");
     }
 
@@ -474,9 +573,6 @@ public class GenericMethodTests {
     static void tearDownAll(TestInfo testInfo) {
         System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
     }
-
-
-
 
 
 }
