@@ -107,7 +107,7 @@ public class GenericMethods {
     public static boolean isString(Object object){
         return object instanceof String;
     }
-
+    
     public static boolean IsNotNull(Object o){
         return o != null;
     }
