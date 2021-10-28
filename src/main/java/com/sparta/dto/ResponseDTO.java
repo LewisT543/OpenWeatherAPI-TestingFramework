@@ -1,6 +1,7 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sparta.util.GenericMethods;
 import com.sparta.util.WeatherCodes;
 
 import java.util.ArrayList;
@@ -318,4 +319,38 @@ public class ResponseDTO{
 		return isInteger(getClouds().getAll());
 	}
 
+	public boolean isSunsetTime(){
+		return GenericMethods.isNotNull(sysDTO.getSunset());
+	}
+
+	public boolean isSunriseTime(){
+		return GenericMethods.isNotNull(sysDTO.getSunrise());
+	}
+
+	public boolean isSunsetTimeLong(){
+		return GenericMethods.isLong(sysDTO.getSunset());
+	}
+
+	public boolean isSunriseTimeLong(){
+		return GenericMethods.isLong(sysDTO.getSunrise());
+	}
+
+	public boolean isSunsetTimeValid(){
+		return GenericMethods.epochDateIsValid(sysDTO.getSunset()) &&
+				GenericMethods.epochIsTenDigits(sysDTO.getSunset());
+	}
+
+	public boolean isSunriseTimeValid(){
+		return GenericMethods.epochDateIsValid(sysDTO.getSunrise()) &&
+				GenericMethods.epochIsTenDigits(sysDTO.getSunrise());
+	}
+
+	// What if sunrise/sunset don't occur in the same day?
+	public boolean isSunsetCorrect(){
+		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
+	}
+
+	public boolean isSunriseCorrect(){
+		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
+	}
 }
