@@ -387,7 +387,6 @@ public class GenericMethodTests {
         void givenDoubleObjectReturnFalse() {
             Assertions.assertFalse(GenericMethods.isInteger(aDouble));
         }
-
     }
     @Nested
     @DisplayName("IsNotNull tests")
@@ -465,18 +464,19 @@ public class GenericMethodTests {
             Assertions.assertFalse(GenericMethods.isBetweenXAndY(testValue,0.0,null));
         }
     }
+  
+    @AfterEach
+    void tearDown (TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName() + " : END");
+    }
+
+    @AfterAll
+    static void tearDownAll(TestInfo testInfo) {
+        System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
+    }
 
 
-        @AfterEach
-        void tearDown(TestInfo testInfo) {
-            System.out.println(testInfo.getDisplayName() + " : END");
-        }
 
-        @AfterAll
-        static void tearDownAll(TestInfo testInfo) {
-            System.out.println("-----------\n" + testInfo.getDisplayName() + " completed");
-
-        }
 
 
 }
