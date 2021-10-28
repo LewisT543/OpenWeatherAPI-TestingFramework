@@ -317,5 +317,4 @@ public class ResponseDTO{
 	public boolean isCloudsAnInt() {
 		return isInteger(getClouds().getAll());
 	}
-
 }
