@@ -44,7 +44,7 @@ out/
 src/main/resources/application.properties
 
 # Other stuff
-/src/main/java/com/sparta/old/
+/src/main/java/com/sparta/alt/
 /src/main/resources/city.json
 /src/main/resources/weather_16.json
 src/main/java/Main.java
