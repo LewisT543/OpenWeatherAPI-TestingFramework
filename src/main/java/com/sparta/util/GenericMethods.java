@@ -1,6 +1,5 @@
 package com.sparta.util;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -9,6 +8,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
+
+import static org.apache.commons.lang3.time.DateUtils.isSameDay;
 
 public class GenericMethods {
 
@@ -108,7 +110,7 @@ public class GenericMethods {
     public static boolean isString(Object object){
         return object instanceof String;
     }
-
+    
     public static boolean IsNotNull(Object o){
         return o != null;
     }
@@ -119,6 +121,22 @@ public class GenericMethods {
         } catch (NullPointerException npe){
             return false;
         }
+    }
+
+    public static boolean epochDateIsValid(Long epoch){
+        return System.currentTimeMillis()/1000 >= epoch;
+    }
+
+    public static boolean epochIsTenDigits(Long epoch){
+        return String.valueOf(epoch).length() == 10;
+    }
+
+    public static Date getHumanDate(Long epochTime) {
+        return new Date(epochTime);
+    }
+
+    public static boolean getDateComparison(Long epoch1, Long epoch2) {
+        return isSameDay(getHumanDate(epoch1), getHumanDate(epoch2));
     }
 
 }
