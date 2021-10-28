@@ -334,4 +334,12 @@ public class ResponseDTO{
 		return mainDTO.getTempMin() > -273;
 	}
 
+	public boolean isMaxTempGreaterThanZeroFahrenheit(){
+		return mainDTO.getTempMax() > -459.67;
+	}
+
+	public boolean isMinTempGreaterThanZeroFahrenheit(){
+		return mainDTO.getTempMin() > -459.67;
+	}
+
 }
