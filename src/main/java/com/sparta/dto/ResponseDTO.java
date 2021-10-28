@@ -1,7 +1,6 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sparta.util.GenericMethods;
 import com.sparta.util.WeatherCodes;
 
 import java.util.ArrayList;
@@ -122,10 +121,10 @@ public class ResponseDTO{
 			WeatherCodes.readWeatherCodes();
 		}
 		// id, main, description, icon must exist i.e. not be null
-		if (!(IsNotNull(weatherItemDTO.getId()) &&
-				IsNotNull(weatherItemDTO.getMain()) &&
-				IsNotNull(weatherItemDTO.getDescription()) &&
-				IsNotNull(weatherItemDTO.getIcon()))) {
+		if (!(isNotNull(weatherItemDTO.getId()) &&
+				isNotNull(weatherItemDTO.getMain()) &&
+				isNotNull(weatherItemDTO.getDescription()) &&
+				isNotNull(weatherItemDTO.getIcon()))) {
 			return false;
 		}
 
