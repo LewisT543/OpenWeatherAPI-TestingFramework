@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+import static com.sparta.util.GenericMethods.*;
+
 public class ResponseDTO{
 
 	@JsonProperty("visibility")
@@ -116,6 +118,24 @@ public class ResponseDTO{
 				"\n}";
 	}
 
+	// Helper A
+	public boolean getSunriseSunsetRequestEqual(Long sunrise, Long sunset, Long dt) {
+		return getDateComparison(sunrise, dt) && getDateComparison(sunset, dt);
+	}
 
+	// Helper B
+	public boolean SunriseAndSunsetOnSameDay(Long sunrise, Long sunset) {
+		return getDateComparison(sunrise, sunset);
+	}
+
+	// Helper C
+	public boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
+		return sunset >= sunrise;
+	}
+
+	// helper D
+	public boolean SunriseAndSunsetValid(Long sunrise, Long sunset, Long dt) {
+		return getSunriseSunsetComparison(sunrise, sunset) && SunriseAndSunsetOnSameDay(sunrise, sunset) && getSunriseSunsetRequestEqual(sunrise, sunset, dt);
+	}
 
 }
