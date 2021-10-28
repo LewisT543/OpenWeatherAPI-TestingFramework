@@ -20,7 +20,8 @@ public class GenericMethods {
     }
 
     public static boolean isADouble(Object field) {
-        if (field.getClass() == Double.class) {
+        if(field instanceof Double) {
+        //if (field.getClass() == Double.class) {
             return true;
         } else {
             return false;

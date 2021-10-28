@@ -100,6 +100,59 @@ public class GenericMethodTests {
         }
     }
 
+    @Nested
+    @DisplayName("Checking if an object is a double")
+    class checkIsADouble {
+        @Test
+        @DisplayName("Check if Double with value is a Double")
+        void checkIfDoubleWithValueIsADouble() {
+            Double input = Double.valueOf(0);
+            Assertions.assertTrue(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if Double without value is a Double")
+        void checkIfDoubleWithoutValueIsADouble() {
+            Double input = null;
+            Assertions.assertFalse(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if primitive double is a Double")
+        void checkIfPrimitiveDoubleIsADouble() {
+            double input = 0;
+            Assertions.assertTrue(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if primitive int is a Double")
+        void checkIfPrimitiveIntIsADouble() {
+            int input = 0;
+            Assertions.assertFalse(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if Object is a Double")
+        void checkIfObjectIsADouble() {
+            Object input = new Object();
+            Assertions.assertFalse(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if String is a Double")
+        void checkIfStringIsADouble() {
+            String input = "sus";
+            Assertions.assertFalse(GenericMethods.isADouble(input));
+        }
+
+        @Test
+        @DisplayName("Check if Double array is a Double")
+        void checkIfDoubleArrayIsADouble() {
+            Double[] input = new Double[] {};
+            Assertions.assertFalse(GenericMethods.isADouble(input));
+        }
+    }
+
     @AfterEach
     void tearDown (TestInfo testInfo) {
         System.out.println(testInfo.getDisplayName() + " : END");
