@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -169,49 +168,49 @@ public class GenericMethodTests {
         @DisplayName("Check if Double with value is a Double")
         void checkIfDoubleWithValueIsADouble() {
             Double input = Double.valueOf(0);
-            Assertions.assertTrue(GenericMethods.isADouble(input));
+            Assertions.assertTrue(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Double without value is a Double")
         void checkIfDoubleWithoutValueIsADouble() {
             Double input = null;
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if primitive double is a Double")
         void checkIfPrimitiveDoubleIsADouble() {
             double input = 0;
-            Assertions.assertTrue(GenericMethods.isADouble(input));
+            Assertions.assertTrue(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if primitive int is a Double")
         void checkIfPrimitiveIntIsADouble() {
             int input = 0;
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Object is a Double")
         void checkIfObjectIsADouble() {
             Object input = new Object();
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if String is a Double")
         void checkIfStringIsADouble() {
             String input = "sus";
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
 
         @Test
         @DisplayName("Check if Double array is a Double")
         void checkIfDoubleArrayIsADouble() {
             Double[] input = new Double[]{};
-            Assertions.assertFalse(GenericMethods.isADouble(input));
+            Assertions.assertFalse(GenericMethods.isDouble(input));
         }
     }
 
@@ -443,25 +442,25 @@ public class GenericMethodTests {
         @DisplayName("Given any String value, return true")
         void givenStringValueReturnTrue(){
             String testValue = "Hello";
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
         }
         @Test
         @DisplayName("Given any Integer value, return true")
         void givenIntegerValueReturnTrue(){
             Integer testValue = 1123;
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
         }
         @Test
         @DisplayName("Given any Double value, return true")
         void givenDoubleValueReturnTrue(){
             Double testValue = 1123.021;
-            Assertions.assertTrue(GenericMethods.IsNotNull(testValue));
+            Assertions.assertTrue(GenericMethods.isNotNull(testValue));
         }
         @Test
         @DisplayName("Given no value, return false")
         void givenNoValueReturnFalse(){
             String testValue = null;
-            Assertions.assertFalse(GenericMethods.IsNotNull(testValue));
+            Assertions.assertFalse(GenericMethods.isNotNull(testValue));
         }
     }
     @Nested

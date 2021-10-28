@@ -26,12 +26,8 @@ public class GenericMethods {
     public static boolean cityIdIsCorrect(String cityName, int ID) {
         JsonNode cityList = loadCityList();
         for (JsonNode city: cityList) {
-            if (city.get("name").textValue().equals(cityName)) {
-                if (city.get("id").intValue() == ID) {
-                    return true;
-                } else {
-                    return false;
-                }
+            if(city.get("name").textValue().equals(cityName)) {
+                return city.get("id").intValue() == ID;
             }
         }
         return false;
@@ -42,11 +38,7 @@ public class GenericMethods {
         for (JsonNode city: cityList) {
             if (city.get("name").textValue().equals(cityName)) {
                 JsonNode coords = city.get("coord");
-                if (coords.get("lon").doubleValue() == lon) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return coords.get("lon").doubleValue() == lon;
             }
         }
         return false;
@@ -57,11 +49,7 @@ public class GenericMethods {
         for (JsonNode city: cityList) {
             if (city.get("name").textValue().equals(cityName)) {
                 JsonNode coords = city.get("coord");
-                if (coords.get("lat").doubleValue() == lat) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return coords.get("lat").doubleValue() == lat;
             }
         }
         return false;
@@ -103,13 +91,8 @@ public class GenericMethods {
         return field > num;
     }
 
-    public static boolean isADouble(Object field) {
-        if(field instanceof Double) {
-        //if (field.getClass() == Double.class) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean isDouble(Object field) {
+        return field instanceof Double;
     }
 
     public static boolean isInteger(Object object) {
@@ -124,7 +107,7 @@ public class GenericMethods {
         return object instanceof Long;
     }
 
-    public static boolean IsNotNull(Object o){
+    public static boolean isNotNull(Object o){
         return o != null;
     }
 
