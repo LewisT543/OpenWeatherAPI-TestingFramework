@@ -414,4 +414,10 @@ public class ResponseDTO{
 		return isGreaterThanOrEqualToZero(getWind().getSpeed());
 	}
 
+	public boolean isMinTempLessThanMaxTempKelvin() {
+		return (getMain().getTempMin() <= getMain().getTempMax());
+	}
+
+
+
 }
