@@ -47,3 +47,4 @@ src/main/resources/application.properties
 /src/main/java/com/sparta/old/
 /src/main/resources/city.json
 /src/main/resources/weather_16.json
+src/main/java/Main.java
