@@ -1,5 +1,6 @@
 package com.sparta.util;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -68,10 +69,47 @@ public class GenericMethods {
 
     public static boolean isGreaterThanZero(Double input){
         return input >= 0;
+
+
+    public static boolean isGreaterThanOrEqualToZero(Object input){
+        return isGreaterThanOrEqualTo(input,0.0);
     }
 
-    public static boolean isGreaterThanZeroOrNull(Double input){
-            return input == null|| input >= 0;
+    public static boolean isGreaterThanOrEqualTo(Object inputNumber, Double baseNumberForComparison){
+        if(inputNumber == null || baseNumberForComparison == null) return false;
+        if(inputNumber.getClass() == String.class){
+            return false;
+        }
+        try{
+            return (Double) inputNumber >= baseNumberForComparison;
+        }catch(ClassCastException ce){
+            return(Integer) inputNumber >= baseNumberForComparison;
+        }
+
+    }
+
+
+    public static boolean isGreaterThanOrEqualToZeroOrNull(Object input){
+        if(input == null) return true;
+        return isGreaterThanOrEqualToZero(input);
+    }
+
+
+    public static boolean isADouble(Object field) {
+        if(field instanceof Double) {
+        //if (field.getClass() == Double.class) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isInteger(Object object) {
+        return object instanceof Integer;
+    }
+
+    public static boolean isString(Object object){
+        return object instanceof String;
     }
 
 }
