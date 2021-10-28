@@ -344,5 +344,17 @@ public class ResponseDTO{
 
 	}
 
+	public boolean isCorrectCityID() {
+		return cityIdIsCorrect(name, sysDTO.getId());
+	}
+
+	public boolean isCorrectCityLon() {
+		return cityLonIsCorrect(name, coordDTO.getLon());
+	}
+
+	public boolean isCorrectCityLat() {
+		return cityLatIsCorrect(name, coordDTO.getLat());
+	}
+
 
 }
