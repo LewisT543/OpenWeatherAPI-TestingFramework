@@ -292,7 +292,6 @@ public class ResponseDTO{
 		return isInteger(getMain().getHumidity());
 	}
 
-
 	public boolean isSeaLevelAnInt() {
 
 		return isInteger(getMain().getSeaLevel());
@@ -319,11 +318,12 @@ public class ResponseDTO{
 	}
 
 	public boolean isMaxTempGreaterThanZeroKelvin(){
-		return mainDTO.getTempMax() > 0;
+		return getMain().getTempMax() > 0;
 	}
 
 	public boolean isMinTempGreaterThanZeroKelvin() {
-		return mainDTO.getTempMin() > 0;
+
+		return getMain().getTempMin() > 0;
 
 	}
 
@@ -364,15 +364,15 @@ public class ResponseDTO{
 	}
 
 	public boolean isCorrectCityID() {
-		return cityIdIsCorrect(name, sysDTO.getId());
+		return cityIdIsCorrect(getName(), getSys().getId());
 	}
 
 	public boolean isCorrectCityLon() {
-		return cityLonIsCorrect(name, coordDTO.getLon());
+		return cityLonIsCorrect(getName(), getCoord().getLon());
 	}
 
 	public boolean isCorrectCityLat() {
-		return cityLatIsCorrect(name, coordDTO.getLat());
+		return cityLatIsCorrect(getName(), getCoord().getLat());
 	}
 
 	public boolean isTempGreaterThan0Kelvin(){
@@ -440,11 +440,11 @@ public class ResponseDTO{
 	}
 
 	public boolean isSunsetTime(){
-		return GenericMethods.isNotNull(sysDTO.getSunset());
+		return GenericMethods.isNotNull(getSys().getSunset());
 	}
 
 	public boolean isSunriseTime(){
-		return GenericMethods.isNotNull(sysDTO.getSunrise());
+		return GenericMethods.isNotNull(getSys().getSunrise());
 	}
 
 	public boolean isSunsetTimeLong(){
@@ -458,31 +458,30 @@ public class ResponseDTO{
 	public boolean isSunsetTimeValid(){
 
 	public boolean isLongSunsetTime(){
-		return GenericMethods.isLong(sysDTO.getSunset());
+		return GenericMethods.isLong(getSys().getSunset());
 	}
 
 	public boolean isLongSunriseTime(){
-		return GenericMethods.isLong(sysDTO.getSunrise());
+		return GenericMethods.isLong(getSys().getSunrise());
 	}
 
 	public boolean isValidSunsetTime(){
-		return GenericMethods.epochDateIsValid(sysDTO.getSunset()) &&
-				GenericMethods.epochIsTenDigits(sysDTO.getSunset());
+		return GenericMethods.epochDateIsValid(getSys().getSunset()) &&
+				GenericMethods.epochIsTenDigits(getSys().getSunset());
 	}
 
 	public boolean isValidSunriseTime(){
-		return GenericMethods.epochDateIsValid(sysDTO.getSunrise()) &&
-				GenericMethods.epochIsTenDigits(sysDTO.getSunrise());
+		return GenericMethods.epochDateIsValid(getSys().getSunrise()) &&
+				GenericMethods.epochIsTenDigits(getSys().getSunrise());
 	}
 
 	// What if sunrise/sunset don't occur in the same day?
 
 	public boolean isCorrectSunsetData(){
-		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
+		return GenericMethods.getDateComparison(getSys().getSunset(), System.currentTimeMillis());
 	}
 
 	public boolean isCorrectSunriseData(){
-
-		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
+		return GenericMethods.getDateComparison(getSys().getSunset(), System.currentTimeMillis());
 	}
 }
