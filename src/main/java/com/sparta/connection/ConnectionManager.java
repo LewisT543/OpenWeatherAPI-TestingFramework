@@ -2,7 +2,9 @@ package com.sparta.connection;
 
 import com.sparta.util.Util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +26,15 @@ public class ConnectionManager {
      */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
+
+        //set unit to standard if not specified
+        if (!params.containsKey("units"))
+            params.put("units", "standard");
+
+        if (!isValidUnit(params.get("units"))) {
+            throw new IllegalArgumentException("units should be standard, metric or imperial");
+        }
+
         switch (endpoints) {
             case BOX -> {url = buildBoxUrl(params);}
             case FIND -> {url =  buildFindUrl(params);}
@@ -38,25 +49,27 @@ public class ConnectionManager {
 
     /***
      * @author Edmund
-     * @version 1.0
+     * @version 2.0
      * Builds the /box endpoint of the API. bbox is a required parameter for this endpoint.
      * lang and units are optional
-     * @throws IllegalArgumentException if bbox param is missing or not in format n1,n2,n3,n4,n5
+     * @throws IllegalArgumentException if bbox param is missing or not in format n1,n2,n3,n4,n5 or units is wrong
      * @param params
      * @return a URL String
      */
     private static String buildBoxUrl(HashMap<String,String> params) throws IllegalArgumentException {
+        params.put("mode", "json");
         stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_URL).append("/box/city?");
 
-        if ( (params.get("key") != null && !params.get("bbox").isEmpty()) &&
-                (params.get("bbox") != null && checkBBox(params.get("bbox")))) {
+        if ((params.get("bbox") != null && !params.get("bbox").isEmpty()) && checkBBox(params.get("bbox"))) {
+
             params.forEach((k,v) -> {
-                if (!v.isEmpty()) {
+                if (!v.isEmpty())
                     stringBuilder.append(k + "=" + v + "&");
-                }
             });
+
             stringBuilder.append("appid=" + Util.getAPIKey());
+
         } else throw new IllegalArgumentException("bbox is required and should formatted: \n\tn1,n2,n3,n4,n5");
         return stringBuilder.toString();
     }
@@ -71,7 +84,7 @@ public class ConnectionManager {
 
     /**
      * @author Edmund
-     * @version 1.2
+     * @version 2.0
      * Builds url for the /find endpoint. Takes in a hashmap of params.
      * Expected params are lat, lon are required; following are optional
      * cnt, mode, units, lang
@@ -81,6 +94,7 @@ public class ConnectionManager {
      * @param params
      */
     private static String buildFindUrl(HashMap<String, String> params) throws IllegalArgumentException {
+        params.put("mode", "json");
         stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_URL).append("/find?");
 
@@ -101,7 +115,7 @@ public class ConnectionManager {
 
     /**
      * @author Edmund
-     * @version 1.2
+     * @version 2.0
      * Builds the /weather endpoint url - q is a required parameter for this endpoint
      * mode is optional - should be set to json for this test
      * @param params
@@ -126,5 +140,9 @@ public class ConnectionManager {
         return stringBuilder.toString();
     }
 
+    private static boolean isValidUnit(String unit) {
+        List<String> units = new ArrayList<>(List.of("standard", "metric", "imperial"));
+        return units.contains(unit);
+    }
 
 }
