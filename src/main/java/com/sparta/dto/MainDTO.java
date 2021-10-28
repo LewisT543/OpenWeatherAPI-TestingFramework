@@ -75,13 +75,5 @@ public class MainDTO {
 				'}';
 	}
 
-	public boolean isTempGreaterThan0Kelvin(){
-		return GenericMethods.isGreaterThanOrEqualTo(temp,0.0);
-	}
-	public boolean isTempGreaterThanMinus273Celcius(){
-		return GenericMethods.isGreaterThanOrEqualTo(temp,-273.0);
-	}
-	public boolean isTempGreaterThanMinus459Fahrenheit(){
-		return GenericMethods.isGreaterThanOrEqualTo(temp,-459.67);
-	}
+
 }

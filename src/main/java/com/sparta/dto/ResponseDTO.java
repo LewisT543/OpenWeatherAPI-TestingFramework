@@ -1,6 +1,7 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sparta.util.GenericMethods;
 import com.sparta.util.WeatherCodes;
 
 import java.util.ArrayList;
@@ -317,5 +318,13 @@ public class ResponseDTO{
 	public boolean isCloudsAnInt() {
 		return isInteger(getClouds().getAll());
 	}
-
+	public boolean isTempGreaterThan0Kelvin(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),0.0);
+	}
+	public boolean isTempGreaterThanMinus273Celcius(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-273.0);
+	}
+	public boolean isTempGreaterThanMinus459Fahrenheit(){
+		return GenericMethods.isGreaterThanOrEqualTo(getMain().getTemp(),-459.67);
+	}
 }
