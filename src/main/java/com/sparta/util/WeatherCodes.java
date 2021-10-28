@@ -7,11 +7,7 @@ import java.util.List;
 
 public class WeatherCodes {
     private static HashMap<Integer, ArrayList<String>> weatherCodes = new HashMap<>();
-
-    public static void main(String[] args) {
-        readWeatherCodes();
-        System.out.println(weatherCodes);
-    }
+    private static boolean hasReadFile = false;
 
     /**
      * Reads a CSV file containing the weather codes and associated data, and adds them to a HashMap
@@ -23,6 +19,7 @@ public class WeatherCodes {
             while ((line = in.readLine()) != null) {
                 parseLine(line);
             }
+            hasReadFile = true;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,5 +43,9 @@ public class WeatherCodes {
      */
     public static ArrayList<String> getWeatherCode(int id) {
         return weatherCodes.get(id);
+    }
+
+    public static boolean hasReadFile() {
+        return hasReadFile;
     }
 }
