@@ -398,4 +398,20 @@ public class ResponseDTO{
 		return getSnow().getThreeHour() >= 0;
 	}
 
+	public boolean isRainH1GreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getRain().getOneHour());
+	}
+
+	public boolean isRainH3GreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getRain().getThreeHour());
+	}
+
+	public boolean isSeaLevelGreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getMain().getSeaLevel());
+	}
+
+	public boolean isWindSpeedGreaterThanOrEqualToZero() {
+		return isGreaterThanOrEqualToZero(getWind().getSpeed());
+	}
+
 }
