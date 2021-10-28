@@ -1,6 +1,10 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sparta.util.GenericMethods;
+import com.sparta.util.WeatherCodes;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.sparta.util.GenericMethods.*;
@@ -113,6 +117,31 @@ public class ResponseDTO{
 		return windDTO;
 	}
 
+
+	public boolean isWeatherItemDTOValid(WeatherItemDTO weatherItemDTO) {
+		if (!WeatherCodes.hasReadFile()) {
+			WeatherCodes.readWeatherCodes();
+		}
+		// id, main, description, icon must exist i.e. not be null
+		if (!(IsNotNull(weatherItemDTO.getId()) &&
+				IsNotNull(weatherItemDTO.getMain()) &&
+				IsNotNull(weatherItemDTO.getDescription()) &&
+				IsNotNull(weatherItemDTO.getIcon()))) {
+			return false;
+		}
+
+		ArrayList<String> fileValues = WeatherCodes.getWeatherCode(weatherItemDTO.getId());
+
+		if (fileValues == null) {
+			return false;
+		}
+
+		// main, description, icon must match up to id
+		return weatherItemDTO.getMain().equals(fileValues.get(0)) &&
+				weatherItemDTO.getDescription().equals(fileValues.get(1)) &&
+				(weatherItemDTO.getIcon().equals(fileValues.get(2)) || weatherItemDTO.getIcon().equals(fileValues.get(3)));
+	}
+  
 	//Check type stuff
 
 	@Override
