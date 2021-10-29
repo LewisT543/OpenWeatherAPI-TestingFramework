@@ -5,6 +5,7 @@ import com.sparta.util.Util;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * Connection manager for building a URL for the OpenWeather API
  * @author edmund
- * @version 2.3
+ * @version 3.0
  */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
@@ -37,9 +38,16 @@ public class ConnectionManager {
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         searchParams = params;
 
-        //call getHttpResponse to add http status code?
+        createConnection(endpoints, searchParams);
 
-        return createConnection(endpoints, searchParams);
+        //call getHttpResponse to add http status code? yes
+        try {
+            getHttpResponse();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return searchParams;
     }
 
     /**
@@ -64,11 +72,7 @@ public class ConnectionManager {
             HttpRequest req = HttpRequest.newBuilder(URI.create(searchParams.get("url"))).GET().build();
             HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
 
-            //get response code
             searchParams.put("status_code", String.valueOf(res.statusCode()));
-
-            //get context from header - why? we already have status code, no?
-
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
