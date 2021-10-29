@@ -2,6 +2,11 @@ package com.sparta.connection;
 
 import com.sparta.util.Util;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +16,13 @@ import java.util.regex.Pattern;
 /**
  * Connection manager for building a URL for the OpenWeather API
  * @author edmund
- * @version 2.1
+ * @version 2.3
  */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
     private static HashMap<String, String> searchParams = new HashMap<>();
     private static StringBuilder stringBuilder;
-    public enum ENDPOINTS {FIND, WEATHER, BOX}
+    public enum ENDPOINTS {FIND, WEATHER_Q, WEATHER_CITY_ID, WEATHER_ZIP, BOX}
 
     /**
      * @author Edmund
@@ -31,6 +36,9 @@ public class ConnectionManager {
      */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         searchParams = params;
+
+        //call getHttpResponse to add http status code?
+
         return createConnection(endpoints, searchParams);
     }
 
@@ -48,6 +56,25 @@ public class ConnectionManager {
         return createConnection(endpoints, params).get("url");
     }
 
+    private static void getHttpResponse() throws IOException, InterruptedException {
+
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+
+            HttpRequest req = HttpRequest.newBuilder(URI.create(searchParams.get("url"))).GET().build();
+            HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
+
+            //get response code
+            searchParams.put("status_code", String.valueOf(res.statusCode()));
+
+            //get context from header - why? we already have status code, no?
+
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static HashMap<String, String> createConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
 
@@ -62,7 +89,9 @@ public class ConnectionManager {
         switch (endpoints) {
             case BOX -> {url = buildBoxUrl(params);}
             case FIND -> {url =  buildFindUrl(params);}
-            case WEATHER -> {url = buildWeatherUrl(params);}
+            case WEATHER_CITY_ID -> {url = buildWeatherUrl("city", params);}
+            case WEATHER_Q -> {url = buildWeatherUrl("q", params);}
+            case WEATHER_ZIP -> {url = buildWeatherUrl("zip", params);}
         }
 
         params.put("url", url);
@@ -153,13 +182,14 @@ public class ConnectionManager {
      * @return a URL String
      * @throws IllegalArgumentException if q is missing
      */
-    private static String buildWeatherUrl(HashMap<String, String> params) throws IllegalArgumentException {
+    private static String buildWeatherUrl(String enforcedParam,
+                                          HashMap<String, String> params) throws IllegalArgumentException {
         params.put("mode", "json");
         stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_URL).append("/weather?");
 
         //check to see if required params are in hashmap
-        if (params.get("q") != null && !params.get("q").isEmpty()) {
+        if (params.get(enforcedParam) != null && !params.get(enforcedParam).isEmpty()) {
             params.forEach((k,v) -> {
                 if (!v.isEmpty()) {
                     stringBuilder.append(k + "=" + v + "&");
@@ -167,7 +197,7 @@ public class ConnectionManager {
             });
 
             stringBuilder.append("appid=" + Util.getAPIKey());
-        } else throw new IllegalArgumentException("q is required");
+        } else throw new IllegalArgumentException(enforcedParam + " is required");
         return stringBuilder.toString();
     }
 
