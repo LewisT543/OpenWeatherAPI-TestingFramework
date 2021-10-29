@@ -37,6 +37,11 @@ public class ConnectionManagerShould {
             params.put("units", "standard");
         }
 
+        @AfterEach
+        void teardown() {
+            connectionManager.resetParams();
+        }
+
         @Test
         @DisplayName("check if error is thrown if lat and lon is not in hashmap")
         void checkIfErrorIsThrownIfLatAndLonAreNotInHashMap() {
