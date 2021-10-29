@@ -10,14 +10,6 @@ public class ConnectionManagerShould {
     private static ConnectionManager connectionManager;
     private static HashMap<String, String> params;
 
-    /**
-     * Testing required params
-     * test that optional params
-     * test illegal argument exception
-     * test null safety
-     * url should work given query parameter not specified in the docs
-     */
-
     @BeforeAll
     @DisplayName("Connection manager testing started")
     static void setup() {
@@ -32,14 +24,6 @@ public class ConnectionManagerShould {
         void init() {
             params.put("q", "London");
         }
-
-        /**
-         * status code is not null
-         * status code is > 199 and < 300
-         * header is avialable
-         * header content-type is application/json; charset=utf-8
-         * header x-cache-key
-         */
 
         @Test
         void GivenGoodCall_StatusCodeIs2XX() {
@@ -72,12 +56,12 @@ public class ConnectionManagerShould {
         @Test
         void GivenCall_HeaderShouldNotBeNull() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(ConnectionManager.getHeadersAndStatusCode() != null);
+            assertNotNull(ConnectionManager.getHeadersAndStatusCode());
         }
 
         void GivenCall_HeaderShouldNotBeEmpty() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(!ConnectionManager.getHeadersAndStatusCode().isEmpty());
+            assertFalse(ConnectionManager.getHeadersAndStatusCode().isEmpty());
         }
 
         @Test
@@ -95,7 +79,7 @@ public class ConnectionManagerShould {
 
         @AfterEach
         void teardown() {
-            connectionManager.resetParams();
+            ConnectionManager.resetParams();
         }
     }
 
@@ -112,7 +96,7 @@ public class ConnectionManagerShould {
 
         @AfterEach
         void teardown() {
-            connectionManager.resetParams();
+            ConnectionManager.resetParams();
         }
 
         @Test
