@@ -159,27 +159,8 @@ public class ResponseDTO{
 	}
 	//Check type stuff
 
-
-	// Helper A
-	public boolean getSunriseSunsetRequestEqual(Long sunrise, Long sunset, Long dt) {
-		return getDateComparison(sunrise, dt) && getDateComparison(sunset, dt);
-	}
-
-	// Helper B
-	public boolean SunriseAndSunsetOnSameDay(Long sunrise, Long sunset) {
-		return getDateComparison(sunrise, sunset);
-	}
-
-	// Helper C
-	public boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
+	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
-	}
-
-	// helper D
-	public boolean SunriseAndSunsetValid(Long sunrise, Long sunset, Long dt) {
-		return getSunriseSunsetComparison(sunrise, sunset)
-					&& SunriseAndSunsetOnSameDay(sunrise, sunset)
-					&& getSunriseSunsetRequestEqual(sunrise, sunset, dt);
 	}
 
 	public boolean isCodInteger(){
@@ -306,7 +287,7 @@ public class ResponseDTO{
 		return isInteger(getWind().getDeg());
 	}
 
-	public boolean isWindGustisDouble() {
+	public boolean isWindGustADouble() {
 		return isDouble(getWind().getGust());
 	}
 
@@ -336,10 +317,6 @@ public class ResponseDTO{
 
 	public boolean isMinTempGreaterThanZeroFahrenheit () {
 		return mainDTO.getTempMin() > -459.67;
-	}
-
-	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100 () {
-			return isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0, 100.0);
 	}
 
 	public boolean isMainHumidityGreaterThan0AndLessThan100 () {
@@ -445,23 +422,3 @@ public class ResponseDTO{
 	public boolean isLongSunriseTime(){
 		return isLong(getSys().getSunrise());
 	}
-
-	public boolean isValidSunsetTime(){
-		return epochDateIsValid(getSys().getSunset()) &&
-				epochIsTenDigits(getSys().getSunset());
-	}
-
-	public boolean isValidSunriseTime(){
-		return epochDateIsValid(getSys().getSunrise()) &&
-				epochIsTenDigits(getSys().getSunrise());
-	}
-
-	// What if sunrise/sunset don't occur in the same day?
-	public boolean isCorrectSunsetData(){
-		return getDateComparison(getSys().getSunset(), System.currentTimeMillis());
-	}
-
-	public boolean isCorrectSunriseData(){
-		return getDateComparison(getSys().getSunset(), System.currentTimeMillis());
-	}
-}
