@@ -160,6 +160,13 @@ public class ConnectionManager {
         return stringBuilder.toString();
     }
 
+    /**
+     * Internal helper method to validate the structure of the bbox param
+     * @author Edmund
+     * @verison 1.0
+     * @param bbox
+     * @return
+     */
     private static boolean checkBBox(String bbox) {
         if (bbox != null) {
             Pattern pattern = Pattern.compile("[0-9]+(,[0-9]+)+");
@@ -249,6 +256,13 @@ public class ConnectionManager {
         return stringBuilder.toString();
     }
 
+    /**
+     * Internal helper method for checking the unit param
+     * @author Edmund
+     * @version 1.0
+     * @param unit
+     * @return
+     */
     private static boolean isValidUnit(String unit) {
         List<String> units = new ArrayList<>(List.of("standard", "metric", "imperial"));
         return units.contains(unit);
