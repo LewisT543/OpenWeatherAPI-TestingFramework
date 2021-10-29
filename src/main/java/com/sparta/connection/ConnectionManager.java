@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
-    private HashMap<String, String> searchParams;
+    private static HashMap<String, String> searchParams = new HashMap<>();
     private static StringBuilder stringBuilder;
     public enum ENDPOINTS {FIND, WEATHER, BOX}
 
@@ -30,7 +30,8 @@ public class ConnectionManager {
      * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
      */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
-        return createConnection(endpoints, params);
+        searchParams = params;
+        return createConnection(endpoints, searchParams);
     }
 
     /**
@@ -66,6 +67,15 @@ public class ConnectionManager {
 
         params.put("url", url);
         return params;
+    }
+
+    /**
+     * Helper method that can be used to reset the parameter Hashmap
+     * @author Edmund
+     * @version 1.0
+     */
+    public static void resetParams() {
+        searchParams.clear();
     }
 
     /***
