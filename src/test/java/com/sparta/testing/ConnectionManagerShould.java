@@ -28,7 +28,7 @@ public class ConnectionManagerShould {
         @Test
         void GivenGoodCall_StatusCodeIs2XX() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            Integer statusCode = Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code"));
+            int statusCode = Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code"));
             assertTrue( statusCode > 199 && statusCode < 300);
         }
 
@@ -59,6 +59,7 @@ public class ConnectionManagerShould {
             assertNotNull(ConnectionManager.getHeadersAndStatusCode());
         }
 
+        @Test
         void GivenCall_HeaderShouldNotBeEmpty() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertFalse(ConnectionManager.getHeadersAndStatusCode().isEmpty());
@@ -74,7 +75,7 @@ public class ConnectionManagerShould {
         @DisplayName("Test to see if 200 http status code is returned")
         void getStatusCode() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code")) == 200);
+            assertEquals(200, Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code")));
         }
 
         @AfterEach
@@ -110,8 +111,7 @@ public class ConnectionManagerShould {
         @Test
         @DisplayName("check to see if it returns the url correctly")
         void checkThatCorrectUrlIsReturnedCorrectly() {
-            HashMap<String, String> response = new HashMap();
-            response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            var response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
             assertTrue(response.get("url").contains("lat=55.356") && response.get("url").contains("lon=-17.81"));
 
         }
@@ -137,7 +137,7 @@ public class ConnectionManagerShould {
             params.put("lang", "en");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("lang=en"));
+            assertTrue(connResponse.get("url").contains("lang=en"));
         }
 
         @Test
@@ -153,7 +153,7 @@ public class ConnectionManagerShould {
             params.put("units", "imperial");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=imperial"));
+            assertTrue((connResponse.get("url").contains("units=imperial")));
         }
 
         @Test
@@ -161,7 +161,7 @@ public class ConnectionManagerShould {
             params.put("units", "metric");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=metric"));
+            assertTrue((connResponse.get("url").contains("units=metric")));
         }
 
         @Test
@@ -169,7 +169,7 @@ public class ConnectionManagerShould {
             params.remove("units");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=standard"));
+            assertTrue( (connResponse.get("url")).contains("units=standard"));
         }
 
 
@@ -178,7 +178,7 @@ public class ConnectionManagerShould {
             params.put("mode", "xml");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue( (connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -186,7 +186,7 @@ public class ConnectionManagerShould {
             params.put("mode", "html");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -194,7 +194,7 @@ public class ConnectionManagerShould {
             params.put("mode", "json");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
     }
@@ -215,7 +215,7 @@ public class ConnectionManagerShould {
             params.put("lang", "en");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("lang=en"));
+            assertTrue((connResponse.get("url")).contains("lang=en"));
         }
 
         @Test
@@ -239,7 +239,7 @@ public class ConnectionManagerShould {
             params.put("units", "imperial");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=imperial"));
+            assertTrue((connResponse.get("url")).contains("units=imperial"));
         }
 
         @Test
@@ -247,7 +247,7 @@ public class ConnectionManagerShould {
             params.put("units", "metric");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=metric"));
+            assertTrue((connResponse.get("url")).contains("units=metric"));
         }
 
         @Test
@@ -255,7 +255,7 @@ public class ConnectionManagerShould {
             params.remove("units");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("units=standard"));
+            assertTrue((connResponse.get("url")).contains("units=standard"));
         }
 
 
@@ -264,7 +264,7 @@ public class ConnectionManagerShould {
             params.put("mode", "xml");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -272,7 +272,7 @@ public class ConnectionManagerShould {
             params.put("mode", "html");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -280,7 +280,7 @@ public class ConnectionManagerShould {
             params.put("mode", "json");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.BOX, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
     }
 
@@ -293,7 +293,7 @@ public class ConnectionManagerShould {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "london");
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(!((String) connResponse.get("url")).isEmpty());
+            assertTrue(!(connResponse.get("url")).isEmpty());
         }
 
         @Test
@@ -301,7 +301,7 @@ public class ConnectionManagerShould {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "london");
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(((String) connResponse.get("url")).contains("q=london"));
+            assertTrue((connResponse.get("url")).contains("q=london"));
         }
 
         @Test
@@ -328,7 +328,7 @@ public class ConnectionManagerShould {
             params.put("mode", "xml");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -338,7 +338,7 @@ public class ConnectionManagerShould {
             params.put("mode", "html");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
 
         @Test
@@ -348,7 +348,7 @@ public class ConnectionManagerShould {
             params.put("mode", "json");
 
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
+            assertTrue((connResponse.get("url")).contains("mode=json"));
         }
     }
 
