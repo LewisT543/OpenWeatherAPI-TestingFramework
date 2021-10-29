@@ -77,7 +77,7 @@ public class ExampleTests {
         @Test
         @DisplayName("is the humidity valid")
         void isTheHumidityValidValue() {
-            params.put("q","Dh1,gb");
+            params.put("q","dh1,gb");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
@@ -101,10 +101,27 @@ public class ExampleTests {
         @Test
         @DisplayName("is the Humidity a valid value")
         void isTheHumidityAValidValue() {
-            params.put("q","Dh1,gb");
-            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
-            rDTO = Injector.injectResponseDTO(params.get("url"));
-            assertTrue(rDTO.getMain().getHumidity()<= 100 && rDTO.getMain().getHumidity()>= 0 );
+            HttpRequest req = HttpRequest
+                    .newBuilder()
+                    .uri(URI.create(ROOT + "/?q=dh1,gb&appid=" + key)) // uniform resource indicator
+                    .build();
+            HttpResponse<String> resp = null;
+            try {
+                resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            JSONParser jsonParser = new JSONParser();
+            try {
+                JSONObject obj = (JSONObject) jsonParser.parse(resp.body());
+                Long humidLong = (Long) ((JSONObject) obj.get("main")).get("humidity");
+                assertTrue(humidLong >= 0 && humidLong <= 100);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
 
         @Test
