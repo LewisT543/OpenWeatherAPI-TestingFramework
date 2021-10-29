@@ -38,7 +38,7 @@ public class ConnectionManager {
      * @return Hashmap<String,String>
      * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
      */
-    public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+    public static HashMap<String, String> getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         searchParams = params;
         createConnection(endpoints, searchParams);
 
@@ -110,9 +110,9 @@ public class ConnectionManager {
         switch (endpoints) {
             case BOX -> {url = buildBoxUrl(params);}
             case FIND -> {url =  buildFindUrl();}
-            case WEATHER_CITY_ID -> {url = buildWeatherUrl("city", params);}
-            case WEATHER_Q -> {url = buildWeatherUrl("q", params);}
-            case WEATHER_ZIP -> {url = buildWeatherUrl("zip", params);}
+            case WEATHER_CITY_ID -> {url = buildWeatherUrl("city");}
+            case WEATHER_Q -> {url = buildWeatherUrl("q");}
+            case WEATHER_ZIP -> {url = buildWeatherUrl("zip");}
         }
 
         params.put("url", url);
@@ -220,22 +220,21 @@ public class ConnectionManager {
 
     /**
      * @author Edmund
-     * @version 2.0
+     * @version 2.1
      * Builds the /weather endpoint url - q is a required parameter for this endpoint
      * mode is optional - should be set to json for this test
-     * @param params
+     * @param enforcedParam - used to specify the required parameter
      * @return a URL String
      * @throws IllegalArgumentException if q is missing
      */
-    private static String buildWeatherUrl(String enforcedParam,
-                                          HashMap<String, String> params) throws IllegalArgumentException {
-        params.put("mode", "json");
+    private static String buildWeatherUrl(String enforcedParam) throws IllegalArgumentException {
+        searchParams.put("mode", "json");
         stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_URL).append("/weather?");
 
         //check to see if required params are in hashmap
-        if (params.get(enforcedParam) != null && !params.get(enforcedParam).isEmpty()) {
-            params.forEach((k,v) -> {
+        if (searchParams.get(enforcedParam) != null && !searchParams.get(enforcedParam).isEmpty()) {
+            searchParams.forEach((k,v) -> {
                 if (!v.isEmpty()) {
                     stringBuilder.append(k + "=" + v + "&");
                 }
