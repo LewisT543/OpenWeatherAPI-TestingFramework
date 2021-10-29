@@ -41,15 +41,56 @@ public class ConnectionManagerShould {
          * header x-cache-key
          */
 
+        @Test
+        void GivenGoodCall_StatusCodeIs2XX() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            Integer statusCode = Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code"));
+            assertTrue( statusCode > 199 && statusCode < 300);
+        }
+
+        @Test
+        void GivenCall_HeaderContentTypeIsJSON() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(ConnectionManager.getHeadersAndStatusCode()
+                    .get("content-type").contains("application/json;"));
+        }
+
+        @Test
+        void GivenCall_HeaderCacheKeyContainsQueryParam() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(ConnectionManager.getHeadersAndStatusCode()
+                    .get("x-cache-key").contains("q=london"));
+        }
+
+        @Test
+        void GivenCall_HeaderContentTypeCharSetIsUTF8() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(ConnectionManager.getHeadersAndStatusCode()
+                    .get("content-type").contains("charset=utf-8"));
+        }
+
+        @Test
+        void GivenCall_HeaderShouldNotBeNull() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(ConnectionManager.getHeadersAndStatusCode() != null);
+        }
+
+        void GivenCall_HeaderShouldNotBeEmpty() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(!ConnectionManager.getHeadersAndStatusCode().isEmpty());
+        }
+
+        @Test
+        void GivenStatusCode_ShouldNotBeNull() {
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(ConnectionManager.getHeadersAndStatusCode().get("status_code") != null);
+        }
 
         @Test
         @DisplayName("Test to see if 200 http status code is returned")
         void getStatusCode() {
-            HashMap<String, String> response;
-
-            response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            System.out.println(response.get("status_code"));
-            assertTrue(Integer.parseInt(response.get("status_code")) == 200);
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            assertTrue(Integer.parseInt(ConnectionManager.getHeadersAndStatusCode().get("status_code")) == 200);
         }
 
         @AfterEach
