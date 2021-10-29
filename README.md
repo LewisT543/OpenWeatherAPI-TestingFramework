@@ -107,3 +107,15 @@ Fields that use this:
 
 > response.isWeatherItemDTOValid(WeatherItemDTO weatherItemDTO)  
 > Takes in a weather item DTO object as a parameter and returns a boolean, indicating whether the key value pairs match the weather codes given [here](https://openweathermap.org/weather-conditions)
+
+### Is Field Greater Than or Equal To Zero Helper
+>
+>is{field}GreaterThanOrEqualToZero()
+Field: RainH1 ,RainH3, SeaLevel, WindSpeed
+Field:
+- RainH1
+- RainH3
+- SeaLevel
+- WindSpeed
+### E.g. isRainH1GreaterThanOrEqualToZero
+- Will return boolean value true if value is greater than or equal to zero.
