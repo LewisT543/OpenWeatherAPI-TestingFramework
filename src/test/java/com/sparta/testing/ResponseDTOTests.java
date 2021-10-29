@@ -139,7 +139,7 @@ public class ResponseDTOTests {
         void checkThatIsSunriseBeforeSunsetReturnsTrueForValidData() {
             Long sunrise = responseDTO.getSys().getSunrise();
             Long sunset = responseDTO.getSys().getSunset();
-            assertTrue(responseDTO.isSunriseBeforeSunset(sunrise, sunset));
+            assertTrue(responseDTO.isSunsetAfterSunrise(sunrise, sunset));
         }
 
         @Test
@@ -147,7 +147,7 @@ public class ResponseDTOTests {
         void checkThatIsSunriseBeforeSunsetReturnsFalseForInvalidData() {
             Long sunrise = responseDTO.getSys().getSunrise();
             Long sunset = responseDTO.getSys().getSunset();
-            assertFalse(responseDTO.isSunriseBeforeSunset(sunset, sunrise));  // just uhh, swap the values, lol
+            assertFalse(responseDTO.isSunsetAfterSunrise(sunset, sunrise));  // just uhh, swap the values, lol
         }
 
         @Test
