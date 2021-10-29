@@ -162,27 +162,9 @@ public class ResponseDTO{
 				"\n}";
 	}
 
-
-	// Helper A
-	public boolean getSunriseSunsetRequestEqual(Long sunrise, Long sunset, Long dt) {
-		return getDateComparison(sunrise, dt) && getDateComparison(sunset, dt);
-	}
-
-	// Helper B
-	public boolean SunriseAndSunsetOnSameDay(Long sunrise, Long sunset) {
-		return getDateComparison(sunrise, sunset);
-	}
-
-	// Helper C
-	public boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
+	public static boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
-
-	// helper D
-	public boolean SunriseAndSunsetValid(Long sunrise, Long sunset, Long dt) {
-		return getSunriseSunsetComparison(sunrise, sunset) && SunriseAndSunsetOnSameDay(sunrise, sunset) && getSunriseSunsetRequestEqual(sunrise, sunset, dt);
-	}
-
 
 	public boolean isCodInteger(){
 		return isInteger(getCod());
@@ -348,9 +330,6 @@ public class ResponseDTO{
 		return mainDTO.getTempMin() > -459.67;
 	}
 
-	public boolean isCloudsAllGreaterThanOrEqualTo0AndLessThan100 () {
-			return GenericMethods.isBetweenXAndY(getClouds().getAll().doubleValue(), 0.0, 100.0);
-	}
 
 	public boolean isMainHumidityGreaterThan0AndLessThan100 () {
 			return GenericMethods.isBetweenXAndY(getMain().getHumidity().doubleValue(), 0.0, 100.0);
@@ -456,22 +435,4 @@ public class ResponseDTO{
 		return GenericMethods.isLong(sysDTO.getSunrise());
 	}
 
-	public boolean isValidSunsetTime(){
-		return GenericMethods.epochDateIsValid(sysDTO.getSunset()) &&
-				GenericMethods.epochIsTenDigits(sysDTO.getSunset());
-	}
-
-	public boolean isValidSunriseTime(){
-		return GenericMethods.epochDateIsValid(sysDTO.getSunrise()) &&
-				GenericMethods.epochIsTenDigits(sysDTO.getSunrise());
-	}
-
-	// What if sunrise/sunset don't occur in the same day?
-	public boolean isCorrectSunsetData(){
-		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
-	}
-
-	public boolean isCorrectSunriseData(){
-		return GenericMethods.getDateComparison(sysDTO.getSunset(), System.currentTimeMillis());
-	}
 }
