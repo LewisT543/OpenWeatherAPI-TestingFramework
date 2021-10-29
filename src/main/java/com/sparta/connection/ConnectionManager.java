@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Connection manager for building a URL for the OpenWeather API
+ * @author edmund
+ * 
+ */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
     private static StringBuilder stringBuilder;
@@ -25,6 +30,24 @@ public class ConnectionManager {
      * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
      */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+        return createConnection(endpoints, params);
+    }
+
+    /**
+     * @author Edmund
+     * @version 1.0
+     * Alternate main method for the connection manager class. Takes an enum for the desired endpoint.
+     * Returns just the url
+     * @param endpoints
+     * @param params
+     * @return Hashmap<String,String>
+     * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
+     */
+    public static String getConnectionString(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+        return createConnection(endpoints, params).get("url");
+    }
+
+    private static HashMap<String, String> createConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
 
         //set unit to standard if not specified
@@ -44,8 +67,6 @@ public class ConnectionManager {
         params.put("url", url);
         return params;
     }
-
-    //TODO: Null check
 
     /***
      * @author Edmund
