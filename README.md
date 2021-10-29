@@ -78,3 +78,32 @@ Example for ID field:
 > responseDTO.isSunsetTime()
 >
 > Will return true if sunset is not null given by a OpenWeather call response.
+
+### Is Correct City Helper
+
+isCorrectyCity{fieldname}
+
+Example for ID field:
+> responseDTO.isCorrectCityID()
+>
+> Will return true if the city and ID are correct according to the citylist given by OpenWeather
+
+For fields: ID, Longitude, Latitude
+
+### Is Field Greater Than And Less Than Helper
+
+is{Field}GreaterThan{MinValue}AndLessThan{MaxValue}
+
+> responseDTO.isMainHumidityGreaterThan0AndLessThan100()  
+> Takes no parameters and returns a boolean, indicating whether the specified field is within the range given.
+
+Fields that use this:
+* MainHumidity (min: 0, max: 100)
+* CoordLat (min: Minus90, max: 90)
+* CoordLon (min: Minus180, max: 180)
+
+
+### Is Weather Item DTO Valid Helper
+
+> response.isWeatherItemDTOValid(WeatherItemDTO weatherItemDTO)  
+> Takes in a weather item DTO object as a parameter and returns a boolean, indicating whether the key value pairs match the weather codes given [here](https://openweathermap.org/weather-conditions)
