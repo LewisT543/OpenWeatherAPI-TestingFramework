@@ -4,18 +4,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.connection.ConnectionManager;
 import com.sparta.dto.ResponseDTO;
 import com.sparta.injector.Injector;
+import com.sparta.util.Util;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -27,10 +31,23 @@ public class ExampleTests {
     private static HashMap<String, String> params;
     private static ResponseDTO rDTO;
     private static final String ROOT = "https://api.openweathermap.org/data/2.5/weather";
+    private static String key;
     static HttpClient client = HttpClient.newHttpClient();
 
     @BeforeAll
     static void initAll(TestInfo testInfo) {
+        // fetch api key
+        try (InputStream input = Util.class.getClassLoader().getResourceAsStream("application.properties")) {
+            Properties prop = new Properties();
+            if (input == null) {
+                System.err.println("Sorry, unable to find application.properties");
+            }
+            prop.load(input);
+            key = prop.getProperty("API-Key");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         connectionManager = new ConnectionManager();
         params = new HashMap<>();
         System.out.println(testInfo.getDisplayName() + " starting\n-----------");
@@ -68,7 +85,7 @@ public class ExampleTests {
             // yay manual connection manager
             HttpRequest req = HttpRequest
                     .newBuilder()
-                    .uri(URI.create("http://shibe.online/api/shibes")) // uniform resource indicator
+                    .uri(URI.create(ROOT + "/?q=London&appid=" + key)) // uniform resource indicator
                     .build();
             HttpResponse<String> resp = null;
             try {
@@ -82,6 +99,7 @@ public class ExampleTests {
             JSONParser jsonParser = new JSONParser();
             try {
                 JSONObject obj = (JSONObject) jsonParser.parse(resp.body());
+                System.out.println(obj);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
