@@ -7,13 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashMap;
 
 public class ConnectionManagerShould {
-    private static ConnectionManager connectionManager;
     private static HashMap<String, String> params;
 
     @BeforeAll
     @DisplayName("Connection manager testing started")
     static void setup() {
-        connectionManager = new ConnectionManager();
+        ConnectionManager connectionManager = new ConnectionManager();
         params = new HashMap<>();
     }
 
@@ -68,7 +67,7 @@ public class ConnectionManagerShould {
         @Test
         void GivenStatusCode_ShouldNotBeNull() {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(ConnectionManager.getHeadersAndStatusCode().get("status_code") != null);
+            assertNotNull(ConnectionManager.getHeadersAndStatusCode().get("status_code"));
         }
 
         @Test
@@ -293,7 +292,7 @@ public class ConnectionManagerShould {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "london");
             var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-            assertTrue(!(connResponse.get("url")).isEmpty());
+            assertFalse((connResponse.get("url")).isEmpty());
         }
 
         @Test
