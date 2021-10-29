@@ -68,16 +68,44 @@ public class ExampleTests {
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
         void searchingByZipcodeReturnsTheCorrectZipcode() {
-            params.put("zip", "Dh1,gb"); // strange that you can replace the q here with zip
+            params.put("zip", "Dh1,gb");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_ZIP,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
-            assertEquals("GB", rDTO.getSys().getCountry());
+            assertEquals("Shincliffe", rDTO.getName());
+        }
+
+        @Test
+        @DisplayName("is the humidity valid")
+        void isTheHumidityValidValue() {
+            params.put("q","Dh1,gb");
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+            rDTO = Injector.injectResponseDTO(params.get("url"));
+            assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
         }
     }
 
     @Nested
     @DisplayName("Not Using the framework")
     class notUsingTheFramework {
+
+
+        @Test
+        @DisplayName("Searching by Zipcode returns the correct zipcode")
+        void searchingByZipcodeReturnsTheCorrectZipcode() {
+            params.put("zip", "Dh1,gb");
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_ZIP, params);
+            rDTO = Injector.injectResponseDTO(params.get("url"));
+            assertEquals("Shincliffe", rDTO.getName());
+        }
+
+        @Test
+        @DisplayName("is the Humidity a valid value")
+        void isTheHumidityAValidValue() {
+            params.put("q","Dh1,gb");
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+            rDTO = Injector.injectResponseDTO(params.get("url"));
+            assertTrue(rDTO.getMain().getHumidity()<= 100 && rDTO.getMain().getHumidity()>= 0 );
+        }
 
         @Test
         @DisplayName("Check that longitude and latitude are valid")
