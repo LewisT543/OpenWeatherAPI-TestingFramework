@@ -8,11 +8,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Connection manager for building a URL for the OpenWeather API
+ * @author edmund
+ * @version 2.1
+ */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
+    private static HashMap<String, String> searchParams = new HashMap<>();
     private static StringBuilder stringBuilder;
     public enum ENDPOINTS {FIND, WEATHER, BOX}
-
 
     /**
      * @author Edmund
@@ -25,6 +30,25 @@ public class ConnectionManager {
      * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
      */
     public static HashMap getConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+        searchParams = params;
+        return createConnection(endpoints, searchParams);
+    }
+
+    /**
+     * @author Edmund
+     * @version 1.0
+     * Alternate main method for the connection manager class. Takes an enum for the desired endpoint.
+     * Returns just the url
+     * @param endpoints
+     * @param params
+     * @return Hashmap<String,String>
+     * @throws IllegalArgumentException when required parameters for the selected endpoint are missing
+     */
+    public static String getConnectionString(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
+        return createConnection(endpoints, params).get("url");
+    }
+
+    private static HashMap<String, String> createConnection(ENDPOINTS endpoints, HashMap<String, String> params) throws IllegalArgumentException {
         String url = null;
 
         //set unit to standard if not specified
@@ -45,7 +69,14 @@ public class ConnectionManager {
         return params;
     }
 
-    //TODO: Null check
+    /**
+     * Helper method that can be used to reset the parameter Hashmap
+     * @author Edmund
+     * @version 1.0
+     */
+    public void resetParams() {
+        searchParams.clear();
+    }
 
     /***
      * @author Edmund

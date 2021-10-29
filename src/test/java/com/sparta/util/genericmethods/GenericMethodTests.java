@@ -523,46 +523,7 @@ public class GenericMethodTests {
         }
     }
 
-    @Nested
-    @DisplayName("Epoch tests")
-    class EpochTests {
-        @Test
-        @DisplayName("Given an epoch return true if valid date")
-        void givenEpochReturnTrueIfDateValid() {
-            Assertions.assertTrue(GenericMethods.epochDateIsValid(System.currentTimeMillis()/1000));
-        }
 
-        @DisplayName("Given an epoch return false if data is not valid")
-        void givenEpochReturnFalseIfDataIsNotValid() {
-            Assertions.assertFalse(GenericMethods.epochDateIsValid(1726572947L));
-        }
-
-
-        @Test
-        @DisplayName("Given an epoch return true if it is 10 digits")
-        void givenEpochReturnTrueIfTenDigits() {
-            Assertions.assertTrue(GenericMethods.epochIsTenDigits(1026572947L));
-        }
-
-        @Test
-        @DisplayName("Given an epoch return false if it is not 10 digits")
-        void givenEpochReturnFalseIfNotTenDigits() {
-            Assertions.assertFalse(GenericMethods.epochIsTenDigits(172947L));
-        }
-
-
-        @Test
-        @DisplayName("Given two epochs return true if same day")
-        void givenTwoEpochsReturnTrueIfSameDay() {
-            Assertions.assertTrue(GenericMethods.getDateComparison(1635403619L,1635439282L));
-        }
-
-        @Test
-        @DisplayName("Given two epochs return false if different day")
-        void givenTwoEpochsReturnFalseIfDifferentDay() {
-            Assertions.assertFalse(GenericMethods.getDateComparison(1635403619L,1026572947L));
-        }
-    }
 
     @AfterEach
     void tearDown(TestInfo testInfo) {
