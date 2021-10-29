@@ -160,7 +160,7 @@ public class ResponseDTO {
 	}
 	//Check type stuff
 
-	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
+	public boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
 
@@ -332,6 +332,12 @@ public class ResponseDTO {
 
 	public boolean isCoordLonGreaterThanMinus180AndLessThan180() {
 		return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
+
+	}
+
+	public boolean isCoordValid(){
+		return isCoordLatADouble() && isCoordLonADouble() && isCoordLatGreaterThanMinus90AndLessThan90() && isCoordLonGreaterThanMinus180AndLessThan180();
+
 	}
 
 	public boolean isCorrectCityID() {
@@ -357,6 +363,7 @@ public class ResponseDTO {
 	public boolean isTempGreaterThanMinus459Fahrenheit() {
 		return isGreaterThanOrEqualTo(getMain().getTemp(), -459.67);
 	}
+
 
 	public boolean isFeelsLikeStandardGreaterThanMin() {
 		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
@@ -427,3 +434,5 @@ public class ResponseDTO {
 	}
 	
 }
+
+
