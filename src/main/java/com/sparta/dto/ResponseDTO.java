@@ -159,7 +159,6 @@ public class ResponseDTO {
 				(weatherItemDTO.getIcon().equals(fileValues.get(2)) || weatherItemDTO.getIcon().equals(fileValues.get(3)));
 	}
 	//Check type stuff
-
 	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
