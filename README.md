@@ -49,3 +49,15 @@ absolute zero.
 
 isMinTempLessThanMaxTempKelvin() 
 >will return a boolean that checks the minimum tmperature is less than or equal to maximum temperature.
+
+### is Temp Greater Than Or Equal To Helper
+- isTempGreaterThan0Kelvin()
+- isTempGreaterThanMinus273Celcius()
+- isTempGreaterThanMinus459Fahrenheit()
+
+Example for isTempGreaterThanOrEqualTo usage:
+> responseDTO.isTempGreaterThan0Kelvin()
+> Will return true if temp called is greater or equal to 0. This should be called when the standard measuring unit is being used.
+
+
+For units: Standard, Metric, Imperial 
