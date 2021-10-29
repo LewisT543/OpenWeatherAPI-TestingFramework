@@ -57,6 +57,7 @@ isMinTempLessThanMaxTempKelvin()
 
 Example for isTempGreaterThanOrEqualTo usage:
 > responseDTO.isTempGreaterThan0Kelvin()
+> 
 > Will return true if temp called is greater or equal to 0. This should be called when the standard measuring unit is being used.
 
 
