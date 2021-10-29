@@ -17,3 +17,14 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 - The first step is to pull the testing framework from the master branch in github
 - Once the testing framework has been pulled the next step is to load and build the testing framework via desired application
 - The testing framework
+- 
+### IsFeelsLike Helper method
+
+- isFeelsLike{units}GreaterThanMin() 
+
+- Example for isFeelsLike field:
+>responseDTO.isFeelsLikeMetricGreaterThanMin()
+>
+>Will return a boolean value that checks if the getFeelsLike in units field is greater than or equal to its min
+
+>For units: Standard,  Metric, Imperial 
