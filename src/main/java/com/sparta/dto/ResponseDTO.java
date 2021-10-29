@@ -334,6 +334,10 @@ public class ResponseDTO {
 		return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
 	}
 
+	public boolean isCoordValid(){
+		return isCoordLatADouble() && isCoordLonADouble() && isCoordLatGreaterThanMinus90AndLessThan90() && isCoordLonGreaterThanMinus180AndLessThan180();
+	}
+
 	public boolean isCorrectCityID() {
 		return cityIdIsCorrect(getName(), getSys().getId());
 	}

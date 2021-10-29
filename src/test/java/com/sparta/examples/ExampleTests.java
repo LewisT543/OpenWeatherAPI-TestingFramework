@@ -43,7 +43,6 @@ public class ExampleTests {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
         connectionManager = new ConnectionManager();
         params = new HashMap<>();
         System.out.println(testInfo.getDisplayName() + " starting\n-----------");
@@ -54,12 +53,26 @@ public class ExampleTests {
         System.out.println(testInfo.getDisplayName() + " : START");
         ConnectionManager.resetParams();
     }
+    //--------------------------------------------------------------------
+    //    Example area
+    //--------------------------------------------------------------------
 
-        // checking if data comes back
 
+
+
+
+
+
+
+
+
+
+    //--------------------------------------------------------------------
+    //    Using the Framework
+    //--------------------------------------------------------------------
     @Nested
-    @DisplayName("UsingTheFrameWork")
-    class usingTheFrameWork {
+    @DisplayName("UsingTheFramework")
+    class usingTheFramework {
 
 
         @Test
@@ -74,7 +87,7 @@ public class ExampleTests {
         @Test
         @DisplayName("is the humidity valid")
         void isTheHumidityValidValue() {
-            params.put("q","dh1,gb");
+            params.put("q","London,GB");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
@@ -83,16 +96,15 @@ public class ExampleTests {
         @Test
         @DisplayName("Check that longitude and latitude of London (UK) is valid")
         void checkThatLongitudeAndLatitudeOfLondonUkIsValid() {
-            params.put("q", "London,UK");
+            params.put("q", "London,GB");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
-            assumeTrue(rDTO.isCoordLonADouble() &&
-                    rDTO.isCoordLatADouble() &&
-                    rDTO.isCoordLonGreaterThanMinus180AndLessThan180() &&
-                    rDTO.isCoordLatGreaterThanMinus90AndLessThan90());
+            assumeTrue(rDTO.isCoordValid());
         }
     }
-
+    //--------------------------------------------------------------------
+    //    Not Using the Framework
+    //--------------------------------------------------------------------
     @Nested
     @DisplayName("Not Using the framework")
     class notUsingTheFramework {
@@ -101,10 +113,24 @@ public class ExampleTests {
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
         void searchingByZipcodeReturnsTheCorrectZipcode() {
-            params.put("zip", "Dh1,gb");
-            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_ZIP, params);
-            rDTO = Injector.injectResponseDTO(params.get("url"));
-            assertEquals("Shincliffe", rDTO.getName());
+            HttpRequest req = HttpRequest
+                    .newBuilder()
+                    .uri(URI.create(ROOT + "/?zip=dh1,gb&appid=" + key)) // uniform resource indicator
+                    .build();
+            HttpResponse<String> resp = null;
+            try {
+                resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            JSONParser jsonParser = new JSONParser();
+            try {
+                JSONObject obj = (JSONObject) jsonParser.parse(resp.body());
+                assertEquals("Shincliffe", obj.get("name"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         @Test
@@ -112,7 +138,7 @@ public class ExampleTests {
         void isTheHumidityAValidValue() {
             HttpRequest req = HttpRequest
                     .newBuilder()
-                    .uri(URI.create(ROOT + "/?q=dh1,gb&appid=" + key)) // uniform resource indicator
+                    .uri(URI.create(ROOT + "/?q=London,GB&appid=" + key)) // uniform resource indicator
                     .build();
             HttpResponse<String> resp = null;
             try {
@@ -126,7 +152,6 @@ public class ExampleTests {
                 JSONObject obj = (JSONObject) jsonParser.parse(resp.body());
                 Long humidLong = (Long) ((JSONObject) obj.get("main")).get("humidity");
                 assertTrue(humidLong >= 0 && humidLong <= 100);
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -138,14 +163,12 @@ public class ExampleTests {
         void checkThatLongitudeAndLatitudeOfLondonUKIsValid() {
             HttpRequest req = HttpRequest
                     .newBuilder()
-                    .uri(URI.create(ROOT + "/?q=London,UK&appid=" + key)) // uniform resource indicator
+                    .uri(URI.create(ROOT + "/?q=London,GB&appid=" + key)) // uniform resource indicator
                     .build();
             HttpResponse<String> resp = null;
             try {
                 resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 
