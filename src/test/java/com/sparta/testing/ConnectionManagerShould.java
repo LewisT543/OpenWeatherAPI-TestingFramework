@@ -23,18 +23,39 @@ public class ConnectionManagerShould {
     static void setup() {
         connectionManager = new ConnectionManager();
         params = new HashMap<>();
-
     }
 
-    @Test
-    @DisplayName("Test to see if 200 http status code is returned")
-    void getStatusCode() {
-        HashMap<String, String> response = new HashMap<>();
-        HashMap<String, String> params = new HashMap<>();
-        params.put("q", "London");
-        response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
-        System.out.println(response.get("status_code"));
-        assertEquals("200", response.get("status_code"));
+    @Nested
+    public class HeaderShould {
+
+        @BeforeEach
+        void init() {
+            params.put("q", "London");
+        }
+
+        /**
+         * status code is not null
+         * status code is > 199 and < 300
+         * header is avialable
+         * header content-type is application/json; charset=utf-8
+         * header x-cache-key
+         */
+
+
+        @Test
+        @DisplayName("Test to see if 200 http status code is returned")
+        void getStatusCode() {
+            HashMap<String, String> response;
+
+            response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+            System.out.println(response.get("status_code"));
+            assertTrue(Integer.parseInt(response.get("status_code")) == 200);
+        }
+
+        @AfterEach
+        void teardown() {
+            connectionManager.resetParams();
+        }
     }
 
     @Nested
