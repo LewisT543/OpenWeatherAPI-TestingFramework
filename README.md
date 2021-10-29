@@ -22,7 +22,7 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 
 ### IsFeelsLike Helper method
 
-- isFeelsLike{units}GreaterThanMin() 
+- isFeelsLike`{units}`GreaterThanMin() 
 
 - Example for isFeelsLike field:
 >responseDTO.isFeelsLikeMetricGreaterThanMin()
@@ -42,5 +42,5 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 - Fahrenheit
 
 #### E.g. isMaxTempGreaterThanZeroCelcius:
-- Returns true if max temperature is greater than
+- Checks whether the max temperature is greater than
 absolute zero.
