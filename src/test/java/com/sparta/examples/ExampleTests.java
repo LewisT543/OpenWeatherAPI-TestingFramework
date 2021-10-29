@@ -52,6 +52,7 @@ public class ExampleTests {
     @BeforeEach
     void init(TestInfo testInfo) {
         System.out.println(testInfo.getDisplayName() + " : START");
+        ConnectionManager.resetParams();
     }
 
         // checking if data comes back
@@ -64,7 +65,7 @@ public class ExampleTests {
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
         void searchingByZipcodeReturnsTheCorrectZipcode() {
-            params.put("zip", "Dh1,gb");
+            params.put("zip", "dh1,gb");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_ZIP,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertEquals("Shincliffe", rDTO.getName());
