@@ -42,5 +42,5 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 - Fahrenheit
 
 #### E.g. isMaxTempGreaterThanZeroCelcius:
-- Checks whether the max temperature is greater than
+- Returns true if max temperature is greater than
 absolute zero.
