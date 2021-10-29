@@ -17,7 +17,9 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 - The first step is to pull the testing framework from the master branch in github
 - Once the testing framework has been pulled the next step is to load and build the testing framework via desired application
 - The testing framework
-- 
+
+# Helper methods
+
 ### IsFeelsLike Helper method
 
 - isFeelsLike{units}GreaterThanMin() 
