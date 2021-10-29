@@ -334,6 +334,11 @@ public class ResponseDTO {
 		return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
 	}
 
+	public boolean isCoordValid(){
+		return isCoordLatADouble() && isCoordLonADouble() && isCoordLatGreaterThanMinus90AndLessThan90() && isCoordLonGreaterThanMinus180AndLessThan180();
+
+	}
+
 	public boolean isCorrectCityID() {
 		return cityIdIsCorrect(getName(), getSys().getId());
 	}
@@ -357,6 +362,7 @@ public class ResponseDTO {
 	public boolean isTempGreaterThanMinus459Fahrenheit() {
 		return isGreaterThanOrEqualTo(getMain().getTemp(), -459.67);
 	}
+
 
 	public boolean isFeelsLikeStandardGreaterThanMin() {
 		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
@@ -425,4 +431,6 @@ public class ResponseDTO {
 	public boolean isSunriseTimeLong() {
 		return isLong(sysDTO.getSunrise());
 	}
+
 }
+
