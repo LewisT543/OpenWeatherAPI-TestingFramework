@@ -162,7 +162,7 @@ public class ResponseDTO{
 				"\n}";
 	}
 
-	public static boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
+	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
 
