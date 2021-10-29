@@ -307,7 +307,7 @@ public class ResponseDTO{
 		return isInteger(getWind().getDeg());
 	}
 
-	public boolean isWindGustisDouble() {
+	public boolean isWindGustADouble() {
 		return isDouble(getWind().getGust());
 	}
 
