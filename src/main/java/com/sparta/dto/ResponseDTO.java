@@ -159,7 +159,12 @@ public class ResponseDTO {
 				(weatherItemDTO.getIcon().equals(fileValues.get(2)) || weatherItemDTO.getIcon().equals(fileValues.get(3)));
 	}
 	//Check type stuff
+<<<<<<< HEAD
 	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
+=======
+
+	public boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
+>>>>>>> f6d4c9f7336e3c733df0fa937abd5cd510de594f
 		return sunset >= sunrise;
 	}
 
@@ -333,6 +338,11 @@ public class ResponseDTO {
 		return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
 	}
 
+	public boolean isCoordValid(){
+		return isCoordLatADouble() && isCoordLonADouble() && isCoordLatGreaterThanMinus90AndLessThan90() && isCoordLonGreaterThanMinus180AndLessThan180();
+
+	}
+
 	public boolean isCorrectCityID() {
 		return cityIdIsCorrect(getName(), getSys().getId());
 	}
@@ -356,6 +366,7 @@ public class ResponseDTO {
 	public boolean isTempGreaterThanMinus459Fahrenheit() {
 		return isGreaterThanOrEqualTo(getMain().getTemp(), -459.67);
 	}
+
 
 	public boolean isFeelsLikeStandardGreaterThanMin() {
 		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
@@ -425,11 +436,5 @@ public class ResponseDTO {
 		return isLong(sysDTO.getSunrise());
 	}
 
-	public boolean isLongSunsetTime() {
-		return isLong(getSys().getSunset());
-	}
-
-	public boolean isLongSunriseTime() {
-		return isLong(getSys().getSunrise());
-	}
 }
+

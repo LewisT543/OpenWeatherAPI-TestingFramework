@@ -9,11 +9,11 @@ import java.nio.file.Paths;
 
 public class TestJson {
 
-    public ResponseDTO loadJson(String name) {
+    public static ResponseDTO loadJson(String name) {
         ObjectMapper objectMapper = new ObjectMapper();
         ResponseDTO responseDTO = null;
         try {
-            responseDTO = objectMapper.readValue(Paths.get("src/main/resources/",name,".json").toFile(), responseDTO.getClass());
+            responseDTO = objectMapper.readValue(Paths.get("src/main/resources/weathercodesjson/",name + ".json").toFile(), ResponseDTO.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

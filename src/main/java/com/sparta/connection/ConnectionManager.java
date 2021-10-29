@@ -119,7 +119,7 @@ public class ConnectionManager {
      * @author Edmund
      * @version 1.0
      */
-    public void resetParams() {
+    public static void resetParams() { //ive changed this to static
         searchParams.clear();
     }
 
