@@ -1,11 +1,9 @@
 package com.sparta.examples;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.connection.ConnectionManager;
 import com.sparta.dto.ResponseDTO;
 import com.sparta.injector.Injector;
 import com.sparta.util.Util;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,16 +12,14 @@ import org.junit.jupiter.api.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Properties;
-import java.util.Random;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class ExampleTests {
 
@@ -82,6 +78,18 @@ public class ExampleTests {
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
         }
+
+        @Test
+        @DisplayName("Check that longitude and latitude of London (UK) is valid")
+        void checkThatLongitudeAndLatitudeOfLondonUkIsValid() {
+            params.put("q", "London,UK");
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+            rDTO = Injector.injectResponseDTO(params.get("url"));
+            assumeTrue(rDTO.isCoordLonADouble() &&
+                    rDTO.isCoordLatADouble() &&
+                    rDTO.isCoordLonGreaterThanMinus180AndLessThan180() &&
+                    rDTO.isCoordLatGreaterThanMinus90AndLessThan90());
+        }
     }
 
     @Nested
@@ -108,12 +116,11 @@ public class ExampleTests {
         }
 
         @Test
-        @DisplayName("Check that longitude and latitude are valid")
-        void checkThatLongitudeAndLatitudeAreValid() {
-            // yay manual connection manager
+        @DisplayName("Check that longitude and latitude of London (UK) is valid")
+        void checkThatLongitudeAndLatitudeOfLondonUKIsValid() {
             HttpRequest req = HttpRequest
                     .newBuilder()
-                    .uri(URI.create(ROOT + "/?q=London&appid=" + key)) // uniform resource indicator
+                    .uri(URI.create(ROOT + "/?q=London,UK&appid=" + key)) // uniform resource indicator
                     .build();
             HttpResponse<String> resp = null;
             try {
@@ -124,13 +131,24 @@ public class ExampleTests {
                 e.printStackTrace();
             }
 
+            Double longitude = null;
+            Double latitude = null;
             JSONParser jsonParser = new JSONParser();
             try {
-                JSONObject obj = (JSONObject) jsonParser.parse(resp.body());
-                System.out.println(obj);
+                JSONObject respObj = (JSONObject) jsonParser.parse(resp.body());
+                JSONObject coord = (JSONObject) respObj.get("coord");
+                longitude = (Double) coord.get("lon");
+                latitude = (Double) coord.get("lat");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            assertTrue(longitude.getClass() == Double.class &&
+                    latitude.getClass() == Double.class &&
+                    longitude > -180 &&
+                    longitude < 180 &&
+                    latitude > -90 &&
+                    latitude < 90);
         }
     }
     
