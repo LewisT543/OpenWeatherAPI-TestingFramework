@@ -18,7 +18,6 @@ public class ConnectionManagerShould {
 
     @Nested
     public class HeaderShould {
-
         @BeforeEach
         void init() {
             params.put("q", "London");
@@ -127,8 +126,64 @@ public class ConnectionManagerShould {
         void GivenLonNotInParams_ShouldThrowIllegalArgumentException() {
             params.remove("lon");
             assertThrows(IllegalArgumentException.class, ()-> {
-                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params).get("url");
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
             });
+        }
+
+        @Test
+        void GivenBadCNT_ShouldThrowIllegalArgumentException() {
+            params.put("cnt", "ww");
+            assertThrows(IllegalArgumentException.class, ()-> {
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            });
+        }
+
+        @Test
+        void GivenNullCNT_ShouldThrowIllegalArgumentException() {
+            params.put("cnt", null);
+            assertThrows(IllegalArgumentException.class, ()-> {
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            });
+        }
+
+        @Test
+        void GivenCNT_ShouldReturnCNTInURL() {
+            params.put("cnt", "10");
+
+            var response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            assertTrue(response.get("url").contains("cnt=10"));
+        }
+
+        @Test
+        void GivenZeroCNT_ShouldThrowIllegalArgumentException() {
+            params.put("cnt", "0");
+            assertThrows(IllegalArgumentException.class, ()-> {
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            });
+        }
+
+        @Test
+        void GivenNegativeCNT_ShouldThrowIllegalArgumentException() {
+            params.put("cnt", "-51");
+            assertThrows(IllegalArgumentException.class, ()-> {
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            });
+        }
+
+        @Test
+        void Given51CNT_ShouldThrowIllegalArgumentException() {
+            params.put("cnt", null);
+            assertThrows(IllegalArgumentException.class, ()-> {
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            });
+        }
+
+        @Test
+        void Given38CNT_ShouldReturnCNTInURL() {
+            params.put("cnt", "38");
+
+            var response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.FIND, params);
+            assertTrue(response.get("url").contains("cnt=38"));
         }
 
         @Test

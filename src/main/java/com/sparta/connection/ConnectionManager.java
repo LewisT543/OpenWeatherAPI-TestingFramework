@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 /**
  * Connection manager for building a URL for the OpenWeather API
  * @author edmund, denis, lewis, bilal
- * @version 3.1
+ * @version 3.2
  */
 public class ConnectionManager {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5";
