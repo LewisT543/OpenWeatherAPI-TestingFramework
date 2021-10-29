@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class Injector {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
+    @Deprecated
     public static CloudsDTO injectCloudsDTO(String url) {
         CloudsDTO cloudsDTO =  new CloudsDTO();
         try {
@@ -18,7 +18,7 @@ public class Injector {
         }
         return cloudsDTO;
     }
-
+    @Deprecated
     public static CoordDTO injectCoordDTO(String url) {
         CoordDTO coordDTO =  new CoordDTO();
         try {
@@ -28,7 +28,7 @@ public class Injector {
         }
         return coordDTO;
     }
-
+    @Deprecated
     public static MainDTO injectMainDTO(String url) {
         MainDTO mainDTO =  new MainDTO();
         try {
@@ -38,7 +38,7 @@ public class Injector {
         }
         return mainDTO;
     }
-
+    @Deprecated
     public static RainDTO injectRainDTO(String url) {
         RainDTO rainDTO =  new RainDTO();
         try {
@@ -58,7 +58,7 @@ public class Injector {
         }
         return responseDTO;
     }
-
+    @Deprecated
     public static SnowDTO injectSnowDTO(String url) {
         SnowDTO snowDTO = new SnowDTO();
         try {
@@ -68,7 +68,7 @@ public class Injector {
         }
         return snowDTO;
     }
-
+    @Deprecated
     public static SysDTO injectSysDTO(String url) {
         SysDTO sysDTO = new SysDTO();
         try {
@@ -78,7 +78,7 @@ public class Injector {
         }
         return sysDTO;
     }
-
+    @Deprecated
     public static WeatherItemDTO injectWeatherItemDTO(String url) {
         WeatherItemDTO weatherItemDTO = new WeatherItemDTO();
         try {
@@ -88,7 +88,7 @@ public class Injector {
         }
         return weatherItemDTO;
     }
-
+    @Deprecated
     public static WindDTO injectWindDTO(String url) {
         WindDTO windDTO = new WindDTO();
         try {
