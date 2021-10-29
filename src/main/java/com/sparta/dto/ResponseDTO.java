@@ -1,7 +1,6 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sparta.util.GenericMethods;
 import com.sparta.util.WeatherCodes;
 
 import java.util.ArrayList;
@@ -162,25 +161,25 @@ public class ResponseDTO{
 
 
 	// Helper A
-	public boolean getSunriseSunsetRequestEqual(Long sunrise, Long sunset, Long dt) {
+	public boolean isSunriseAndSunsetEqualToRequestDay(Long sunrise, Long sunset, Long dt) {
 		return getDateComparison(sunrise, dt) && getDateComparison(sunset, dt);
 	}
 
 	// Helper B
-	public boolean SunriseAndSunsetOnSameDay(Long sunrise, Long sunset) {
+	public boolean isSunriseAndSunsetOnSameDay(Long sunrise, Long sunset) {
 		return getDateComparison(sunrise, sunset);
 	}
 
 	// Helper C
-	public boolean getSunriseSunsetComparison(Long sunrise, Long sunset) {
+	public boolean isSunriseBeforeSunset(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
 
 	// helper D
-	public boolean SunriseAndSunsetValid(Long sunrise, Long sunset, Long dt) {
-		return getSunriseSunsetComparison(sunrise, sunset)
-					&& SunriseAndSunsetOnSameDay(sunrise, sunset)
-					&& getSunriseSunsetRequestEqual(sunrise, sunset, dt);
+	public boolean isSunriseAndSunsetValid(Long sunrise, Long sunset, Long dt) {
+		return isSunriseBeforeSunset(sunrise, sunset)
+					&& isSunriseAndSunsetOnSameDay(sunrise, sunset)
+					&& isSunriseAndSunsetEqualToRequestDay(sunrise, sunset, dt);
 	}
 
 	public boolean isCodInteger(){
