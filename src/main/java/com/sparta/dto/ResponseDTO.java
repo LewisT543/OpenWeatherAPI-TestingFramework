@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.sparta.util.GenericMethods.*;
 
-public class ResponseDTO{
+public class ResponseDTO {
 
 	@JsonProperty("visibility")
 	private Integer visibility;
@@ -56,63 +56,63 @@ public class ResponseDTO{
 	@JsonProperty("wind")
 	private WindDTO windDTO;
 
-	public Integer getVisibility(){
+	public Integer getVisibility() {
 		return visibility;
 	}
 
-	public Integer getTimezone(){
+	public Integer getTimezone() {
 		return timezone;
 	}
 
-	public MainDTO getMain(){
+	public MainDTO getMain() {
 		return mainDTO;
 	}
 
-	public CloudsDTO getClouds(){
+	public CloudsDTO getClouds() {
 		return cloudsDTO;
 	}
 
-	public SnowDTO getSnow(){  //THIS WAS ADDED MANUALLY
+	public SnowDTO getSnow() {  //THIS WAS ADDED MANUALLY
 		return snowDTO;
 	}
 
-	public RainDTO getRain(){  //THIS WAS ADDED MANUALLY
+	public RainDTO getRain() {  //THIS WAS ADDED MANUALLY
 		return rainDTO;
 	}
 
-	public SysDTO getSys(){
+	public SysDTO getSys() {
 		return sysDTO;
 	}
 
-	public Long getDt(){
+	public Long getDt() {
 		return dt;
 	}
 
-	public CoordDTO getCoord(){
+	public CoordDTO getCoord() {
 		return coordDTO;
 	}
 
-	public List<WeatherItemDTO> getWeather(){
+	public List<WeatherItemDTO> getWeather() {
 		return weather;
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
-	public Integer getCod(){
+	public Integer getCod() {
 		return cod;
 	}
 
-	public Integer getId(){
+	public Integer getId() {
 		return id;
 	}
 
-	public String getBase(){
+	public String getBase() {
 		return base;
 	}
 
-	public WindDTO getWind(){
+	public WindDTO getWind() {
 		return windDTO;
 	}
 
@@ -160,67 +160,68 @@ public class ResponseDTO{
 	}
 	//Check type stuff
 
-	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
+	public boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
 
-	public boolean isCodInteger(){
+	public boolean isCodInteger() {
 		return isInteger(getCod());
 	}
 
-	public boolean isNameString(){
+	public boolean isNameString() {
 		return isString(getName());
 	}
 
-	public boolean isIdInt(){
+	public boolean isIdInt() {
 		return isInteger(getId());
 	}
 
-	public boolean isTimeZoneInteger(){
+	public boolean isTimeZoneInteger() {
 		return isInteger(getTimezone());
 	}
 
-	public boolean isSysSunsetALong(){
+	public boolean isSysSunsetALong() {
 		return isLong(getSys().getSunset());
 	}
 
-	public boolean isSysSunriseALong(){
+	public boolean isSysSunriseALong() {
 		return isLong(getSys().getSunrise());
 	}
 
-	public boolean isSysCountryString(){
+	public boolean isSysCountryString() {
 		return isString(getSys().getCountry());
 	}
 
-	public boolean isSysMessageDouble(){
+	public boolean isSysMessageDouble() {
 		return isDouble(getSys().getMessage());
 	}
 
-	public boolean isDtALong(){
+	public boolean isDtALong() {
 		return isLong(getDt());
 	}
 
-	public boolean isSnowH1Double(){
+	public boolean isSnowH1Double() {
 		return isDouble(getSnow().getOneHour());
 	}
 
-	public boolean isSnowH3Double(){
+	public boolean isSnowH3Double() {
 		return isDouble(getSnow().getThreeHour());
 	}
 
-	public boolean isRainH1Double(){
+	public boolean isRainH1Double() {
 		return isDouble(getRain().getOneHour());
 	}
 
-	public boolean isRainH3Double(){
+	public boolean isRainH3Double() {
 		return isDouble(getRain().getThreeHour());
 	}
-	
+
 	//WEATHER METHODS NEEDS TO BE CHECKED
 	public boolean isWeatherIdAnInt() {
 		//Weather is a list of WeatherDTO's
 		return isInteger(getWeather().get(0).getId());
 	}
+
 	public boolean isWeatherMainAString() {
 		//Weather is a list of WeatherDTO's
 		return isString(getWeather().get(0).getMain());
@@ -240,6 +241,7 @@ public class ResponseDTO{
 	public boolean isCoordLonADouble() {
 		return isDouble(getCoord().getLon());
 	}
+
 	public boolean isCoordLatADouble() {
 		return isDouble(getCoord().getLat());
 	}
@@ -303,33 +305,33 @@ public class ResponseDTO{
 	public boolean isMinTempGreaterThanZeroKelvin() {
 		return getMain().getTempMin() > 0;
 	}
-  
-	public boolean isMaxTempGreaterThanZeroCelsius () {
+
+	public boolean isMaxTempGreaterThanZeroCelsius() {
 		return mainDTO.getTempMax() > -273;
 	}
 
-	public boolean isMinTempGreaterThanZeroCelsius () {
+	public boolean isMinTempGreaterThanZeroCelsius() {
 		return mainDTO.getTempMin() > -273;
 	}
 
-	public boolean isMaxTempGreaterThanZeroFahrenheit () {
+	public boolean isMaxTempGreaterThanZeroFahrenheit() {
 		return mainDTO.getTempMax() > -459.67;
 	}
 
-	public boolean isMinTempGreaterThanZeroFahrenheit () {
+	public boolean isMinTempGreaterThanZeroFahrenheit() {
 		return mainDTO.getTempMin() > -459.67;
 	}
 
-	public boolean isMainHumidityGreaterThan0AndLessThan100 () {
-			return isBetweenXAndY(getMain().getHumidity().doubleValue(), 0.0, 100.0);
+	public boolean isMainHumidityGreaterThan0AndLessThan100() {
+		return isBetweenXAndY(getMain().getHumidity().doubleValue(), 0.0, 100.0);
 	}
 
-	public boolean isCoordLatGreaterThanMinus90AndLessThan90 () {
-			return isBetweenXAndY(getCoord().getLat(), -90.0, 90.0);
+	public boolean isCoordLatGreaterThanMinus90AndLessThan90() {
+		return isBetweenXAndY(getCoord().getLat(), -90.0, 90.0);
 	}
 
-	public boolean isCoordLonGreaterThanMinus180AndLessThan180 () {
-			return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
+	public boolean isCoordLonGreaterThanMinus180AndLessThan180() {
+		return isBetweenXAndY(getCoord().getLon(), -180.0, 180.0);
 	}
 
 	public boolean isCorrectCityID() {
@@ -344,28 +346,28 @@ public class ResponseDTO{
 		return cityLatIsCorrect(getName(), getCoord().getLat());
 	}
 
-	public boolean isTempGreaterThan0Kelvin(){
-		return isGreaterThanOrEqualTo(getMain().getTemp(),0.0);
+	public boolean isTempGreaterThan0Kelvin() {
+		return isGreaterThanOrEqualTo(getMain().getTemp(), 0.0);
 	}
-  
-	public boolean isTempGreaterThanMinus273Celcius(){
-		return isGreaterThanOrEqualTo(getMain().getTemp(),-273.0);
-  }
-  
-	public boolean isTempGreaterThanMinus459Fahrenheit(){
-		return isGreaterThanOrEqualTo(getMain().getTemp(),-459.67);
+
+	public boolean isTempGreaterThanMinus273Celcius() {
+		return isGreaterThanOrEqualTo(getMain().getTemp(), -273.0);
 	}
-  
-	public boolean isFeelsLikeStandardGreaterThanMin(){
+
+	public boolean isTempGreaterThanMinus459Fahrenheit() {
+		return isGreaterThanOrEqualTo(getMain().getTemp(), -459.67);
+	}
+
+	public boolean isFeelsLikeStandardGreaterThanMin() {
 		return isGreaterThanOrEqualToZero(getMain().getFeelsLike());
 	}
 
-	public boolean isFeelsLikeMetricGreaterThanMin(){
-		return isGreaterThanOrEqualTo(getMain().getFeelsLike(),-273.0);
+	public boolean isFeelsLikeMetricGreaterThanMin() {
+		return isGreaterThanOrEqualTo(getMain().getFeelsLike(), -273.0);
 	}
 
-	public boolean isFeelsLikeImperialGreaterThanMin(){
-		return isGreaterThanOrEqualTo(getMain().getFeelsLike(),-459.67);
+	public boolean isFeelsLikeImperialGreaterThanMin() {
+		return isGreaterThanOrEqualTo(getMain().getFeelsLike(), -459.67);
 	}
 
 	public boolean isRainH1GreaterThanOrEqualToZero() {
@@ -408,26 +410,19 @@ public class ResponseDTO{
 		return isGreaterThanOrEqualToZero(getSnow().getThreeHour());
 	}
 
-	public boolean isSunsetTime(){
+	public boolean isSunsetTime() {
 		return isNotNull(getSys().getSunset());
 	}
 
-	public boolean isSunriseTime(){
+	public boolean isSunriseTime() {
 		return isNotNull(getSys().getSunrise());
 	}
 
-	public boolean isSunsetTimeLong(){
+	public boolean isSunsetTimeLong() {
 		return isLong(sysDTO.getSunset());
 	}
 
-	public boolean isSunriseTimeLong(){
+	public boolean isSunriseTimeLong() {
 		return isLong(sysDTO.getSunrise());
 	}
-
-	public boolean isLongSunsetTime(){
-		return isLong(getSys().getSunset());
-	}
-
-	public boolean isLongSunriseTime(){
-		return isLong(getSys().getSunrise());
-	}
+}
