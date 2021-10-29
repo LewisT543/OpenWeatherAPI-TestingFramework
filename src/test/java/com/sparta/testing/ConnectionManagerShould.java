@@ -26,6 +26,17 @@ public class ConnectionManagerShould {
 
     }
 
+    @Test
+    @DisplayName("Test to see if 200 http status code is returned")
+    void getStatusCode() {
+        HashMap<String, String> response = new HashMap<>();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("q", "London");
+        response = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
+        System.out.println(response.get("status_code"));
+        assertEquals("200", response.get("status_code"));
+    }
+
     @Nested
     @DisplayName("find endpoint testing")
     public class FindShould {
