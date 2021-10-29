@@ -45,7 +45,7 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 - Checks whether the max temperature is greater than
 absolute zero.
 
-###Is Min Temp Less Than Max Temp Helper
+### Is Min Temp Less Than Max Temp Helper
 
 isMinTempLessThanMaxTempKelvin() 
 >will return a boolean that checks the minimum tmperature is less than or equal to maximum temperature.
