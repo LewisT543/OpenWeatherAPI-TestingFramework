@@ -72,11 +72,7 @@ public class ConnectionManager {
             HttpRequest req = HttpRequest.newBuilder(URI.create(searchParams.get("url"))).GET().build();
             HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
 
-            //get response code
             searchParams.put("status_code", String.valueOf(res.statusCode()));
-
-            //get context from header - why? we already have status code, no?
-            //searchParams.put("headers", res.headers().);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
