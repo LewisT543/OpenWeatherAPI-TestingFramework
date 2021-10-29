@@ -1,7 +1,6 @@
 package com.sparta.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sparta.util.GenericMethods;
 import com.sparta.util.WeatherCodes;
 
 import java.util.ArrayList;
@@ -437,14 +436,6 @@ public class ResponseDTO{
 
 	public boolean isSunriseTime(){
 		return isNotNull(getSys().getSunrise());
-	}
-
-	public boolean isSunsetTimeLong(){
-		return isLong(sysDTO.getSunset());
-	}
-
-	public boolean isSunriseTimeLong(){
-		return isLong(sysDTO.getSunrise());
 	}
 
 	public boolean isLongSunsetTime(){
