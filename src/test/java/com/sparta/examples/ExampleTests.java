@@ -34,25 +34,6 @@ public class ExampleTests {
     @DisplayName("UsingTheFrameWork")
     class usingTheFrameWork {
 
-//        @Test
-//        @DisplayName("when a language is specified the weather description should be in that language") // needs a helper method, but im pretty sure this would be incredibly difficult to actually do.
-//        void whenALanguageIsSpecifiedTheWeatherDescriptionShouldBeInThatLanguage() {
-//            params.put("q","Barcelona");
-//            params.put("lang","es");
-//            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER,params);
-//            rDTO = Injector.injectResponseDTO(params.get("url"));
-//            assertTrue(true);
-//        }
-
-//        @Test
-//        @DisplayName("call data in a given unit of measurement") // again difficult to determine as how do we know if the response is in each of the units
-//        void callDataInAGivenUnitOfMeasurement() {
-//            params.put("q", "Edinburgh");
-//            params.put("units","imperial");
-//            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER,params);
-//            rDTO = Injector.injectResponseDTO(params.get("url"));
-//            assertTrue(true);
-//        }
 
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
@@ -60,20 +41,16 @@ public class ExampleTests {
             params.put("q", "Dh1,gb"); // strange that you can replace the q here with zip
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
-            assertEquals("GB",rDTO.getSys().getCountry());
+            assertEquals("GB", rDTO.getSys().getCountry());
         }
-
-
-
-
     }
 
     @Nested
     @DisplayName("Not Using the framework")
     class notUsingTheFramework {
         @Test
-        @DisplayName("when a language is specified the weather description should be in that language")
-        void whenALanguageIsSpecifiedTheWeatherDescriptionShouldBeInThatLanguage() {
+        @DisplayName("")
+        void methodName() {
             
         }
     }
