@@ -74,7 +74,7 @@ public class ConnectionManager {
      * @author Edmund
      * @version 1.0
      */
-    public static void resetParams() {
+    public void resetParams() {
         searchParams.clear();
     }
 
