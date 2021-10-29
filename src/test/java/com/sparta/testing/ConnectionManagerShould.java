@@ -235,7 +235,7 @@ public class ConnectionManagerShould {
         void GivenValidCity_ShouldReturnURL() {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "london");
-            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertTrue(!((String) connResponse.get("url")).isEmpty());
         }
 
@@ -243,7 +243,7 @@ public class ConnectionManagerShould {
         void GivenValidCity_ShouldHaveCityInURL() {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "london");
-            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertTrue(((String) connResponse.get("url")).contains("q=london"));
         }
 
@@ -251,7 +251,7 @@ public class ConnectionManagerShould {
         void GivenNoQParam_ShouldThrowIllegalArgumentException() {
             HashMap<String, String> params = new HashMap<>();
             assertThrows(IllegalArgumentException.class, () -> {
-                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             });
         }
 
@@ -260,7 +260,7 @@ public class ConnectionManagerShould {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", null);
             assertThrows(IllegalArgumentException.class, () -> {
-                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+                ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             });
         }
 
@@ -270,7 +270,7 @@ public class ConnectionManagerShould {
             params.put("q", "london");
             params.put("mode", "xml");
 
-            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
         }
 
@@ -280,7 +280,7 @@ public class ConnectionManagerShould {
             params.put("q", "london");
             params.put("mode", "html");
 
-            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
         }
 
@@ -290,7 +290,7 @@ public class ConnectionManagerShould {
             params.put("q", "london");
             params.put("mode", "json");
 
-            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER, params);
+            var connResponse = ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q, params);
             assertTrue( ((String) connResponse.get("url")).contains("mode=json"));
         }
     }
