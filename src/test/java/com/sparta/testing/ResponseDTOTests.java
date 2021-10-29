@@ -117,34 +117,18 @@ public class ResponseDTOTests {
             responseDTO = TestJson.loadJson("valid");
         }
 
-        @Test
-        @DisplayName("Check that isSunriseAndSunsetEqualToRequestDay returns true when sunrise and sunset occur on same day as api request")
-        void checkThatIsSunriseAndSunsetEqualToRequestDayReturnsTrueWhenSunriseAndSunsetOccurOnSameDayAsApiRequest() {
-            Long sunrise = responseDTO.getSys().getSunrise();
-            Long sunset = responseDTO.getSys().getSunset();
-            Long dt = responseDTO.getDt();
-            assertTrue(responseDTO.isSunriseAndSunsetEqualToRequestDay(sunrise, sunset, dt));
-        }
 
         @Test
-        @DisplayName("Check that isSunriseAndSunsetOnSameDay returns true for valid data")
-        void checkThatIsSunriseAndSunsetOnSameDayReturnsTrueForValidData() {
-            Long sunrise = responseDTO.getSys().getSunrise();
-            Long sunset = responseDTO.getSys().getSunset();
-            assertTrue(responseDTO.isSunriseAndSunsetOnSameDay(sunrise, sunset));
-        }
-
-        @Test
-        @DisplayName("Check that isSunriseBeforeSunset returns true for valid data")
-        void checkThatIsSunriseBeforeSunsetReturnsTrueForValidData() {
+        @DisplayName("Check that isSunsetAfterSunrise returns true for valid data")
+        void checkThatIsSunsetAfterSunriseReturnsTrueForValidData() {
             Long sunrise = responseDTO.getSys().getSunrise();
             Long sunset = responseDTO.getSys().getSunset();
             assertTrue(responseDTO.isSunsetAfterSunrise(sunrise, sunset));
         }
 
         @Test
-        @DisplayName("Check that isSunriseBeforeSunset returns false for invalid data")
-        void checkThatIsSunriseBeforeSunsetReturnsFalseForInvalidData() {
+        @DisplayName("Check that isSunsetAfterSunrise returns false for invalid data")
+        void checkThatIsSunsetAfterSunriseReturnsFalseForInvalidData() {
             Long sunrise = responseDTO.getSys().getSunrise();
             Long sunset = responseDTO.getSys().getSunset();
             assertFalse(responseDTO.isSunsetAfterSunrise(sunset, sunrise));  // just uhh, swap the values, lol

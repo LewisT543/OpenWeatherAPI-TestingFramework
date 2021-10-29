@@ -160,7 +160,7 @@ public class ResponseDTO {
 	}
 	//Check type stuff
 
-	public static boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
+	public boolean isSunsetAfterSunrise(Long sunrise, Long sunset) {
 		return sunset >= sunrise;
 	}
 
