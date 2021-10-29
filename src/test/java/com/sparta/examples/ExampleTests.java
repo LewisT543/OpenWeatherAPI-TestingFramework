@@ -38,8 +38,8 @@ public class ExampleTests {
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
         void searchingByZipcodeReturnsTheCorrectZipcode() {
-            params.put("q", "Dh1,gb"); // strange that you can replace the q here with zip
-            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER,params);
+            params.put("zip", "Dh1,gb"); // strange that you can replace the q here with zip
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_ZIP,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertEquals("GB", rDTO.getSys().getCountry());
         }
