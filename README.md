@@ -62,3 +62,19 @@ Example for isTempGreaterThanOrEqualTo usage:
 
 
 For units: Standard, Metric, Imperial 
+
+### Is Sunset/Sunrise Helper
+
+is{fieldname}TimeLong()
+
+Example for ID field:
+> responseDTO.isSunsetTimeLong()
+>
+> Will return true if sunset is of Long type given by a OpenWeather call response.
+
+is{fieldname}Time()
+
+Example for ID field:
+> responseDTO.isSunsetTime()
+>
+> Will return true if sunset is not null given by a OpenWeather call response.
