@@ -111,20 +111,4 @@ public class GenericMethods {
         }
     }
 
-    public static boolean epochDateIsValid(Long epoch){
-        return System.currentTimeMillis()/1000 >= epoch;
-    }
-
-    public static boolean epochIsTenDigits(Long epoch){
-        return String.valueOf(epoch).length() == 10;
-    }
-
-    public static Date getHumanDate(Long epochTime) {
-        return new Date(epochTime);
-    }
-
-    public static boolean getDateComparison(Long epoch1, Long epoch2) {
-        return isSameDay(getHumanDate(epoch1), getHumanDate(epoch2));
-    }
-
 }
