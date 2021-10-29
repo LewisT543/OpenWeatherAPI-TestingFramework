@@ -425,12 +425,4 @@ public class ResponseDTO {
 	public boolean isSunriseTimeLong() {
 		return isLong(sysDTO.getSunrise());
 	}
-
-	public boolean isLongSunsetTime() {
-		return isLong(getSys().getSunset());
-	}
-
-	public boolean isLongSunriseTime() {
-		return isLong(getSys().getSunrise());
-	}
 }

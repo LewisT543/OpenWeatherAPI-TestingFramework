@@ -150,15 +150,6 @@ public class ResponseDTOTests {
             assertFalse(responseDTO.isSunsetAfterSunrise(sunset, sunrise));  // just uhh, swap the values, lol
         }
 
-        @Test
-        @DisplayName("Check that isSunriseAndSunsetValid returns true for valid data")
-        void checkThatIsSunriseAndSunsetValidReturnsTrueForValidData() {
-            Long sunrise = responseDTO.getSys().getSunrise();
-            Long sunset = responseDTO.getSys().getSunset();
-            Long dt = responseDTO.getDt();
-            assertTrue(responseDTO.isSunriseAndSunsetValid(sunrise, sunset, dt));
-        }
-
     }
 
 }
