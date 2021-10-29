@@ -30,3 +30,17 @@ A testing framework designed to test the functionality of the OpenWeatherAPI
 >Will return a boolean value that checks if the getFeelsLike in units field is greater than or equal to its min
 
 >For units: Standard,  Metric, Imperial 
+
+### is`Bound`TempGreaterThanZero`Unit`
+`Bound:`
+- Min
+- Max
+
+`Unit:`
+- Kelvin
+- Celcius
+- Fahrenheit
+
+#### E.g. isMaxTempGreaterThanZeroCelcius:
+- Checks whether the max temperature is greater than
+absolute zero.
