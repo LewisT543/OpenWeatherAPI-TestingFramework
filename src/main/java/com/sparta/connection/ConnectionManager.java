@@ -28,6 +28,10 @@ public class ConnectionManager {
 
     private static HashMap<String, String> headersAndStatusCode = new HashMap<>();
 
+    public static HashMap<String, String> getHeadersAndStatusCode() {
+        return headersAndStatusCode;
+    }
+
     /**
      * @author Edmund
      * @version 1.2
