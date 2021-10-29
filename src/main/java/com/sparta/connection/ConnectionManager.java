@@ -5,12 +5,12 @@ import com.sparta.util.Util;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +24,8 @@ public class ConnectionManager {
     private static HashMap<String, String> searchParams = new HashMap<>();
     private static StringBuilder stringBuilder;
     public enum ENDPOINTS {FIND, WEATHER_Q, WEATHER_CITY_ID, WEATHER_ZIP, BOX}
+
+    private static HashMap<String, String> headersAndStatusCode = new HashMap<>();
 
     /**
      * @author Edmund
@@ -65,7 +67,6 @@ public class ConnectionManager {
     }
 
     private static void getHttpResponse() throws IOException, InterruptedException {
-
         try {
             HttpClient client = HttpClient.newHttpClient();
 
@@ -74,6 +75,17 @@ public class ConnectionManager {
 
             searchParams.put("status_code", String.valueOf(res.statusCode()));
 
+            // This works, but it isn't tested yet - Might write them later, might not...
+            headersAndStatusCode.put("status_code", String.valueOf(res.statusCode()));
+            for (Map.Entry<String, List<String>> entry : res.headers().map().entrySet()) {
+                for (String item : entry.getValue()) {
+                    String numericName = entry.getKey();
+                    headersAndStatusCode.put(numericName, item);
+                }
+            }
+            for (Map.Entry<String, String> entry : headersAndStatusCode.entrySet()) {
+                System.out.println(entry.getKey() + " : " + entry.getValue());
+            }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
