@@ -57,11 +57,27 @@ public class GenericMethods {
         return false;
     }
 
-
+    /**
+    * Modified version of the is greater than or equal to method with the base comparison number removed, this only checks against 0.
+    * @author Dan
+    * @version 1.0
+    * @param input
+    * @return boolean
+    **/
     public static boolean isGreaterThanOrEqualToZero(Object input){
         return isGreaterThanOrEqualTo(input,0.0);
     }
 
+    /**
+    * Takes in an object which ideally wants to be a double however can be an integer as well, and compares this to a double.
+    * If the first number is larger than or equal to the second number then this method will return true.
+    * This method will return false if the input number is a string, or if the input is null.
+    * @author Dan
+    * @version 2.0
+    * @param inputNumber
+    * @param baseNumberForComparison
+    * @return boolean
+    **/
     public static boolean isGreaterThanOrEqualTo(Object inputNumber, Double baseNumberForComparison){
         if(inputNumber == null || baseNumberForComparison == null) return false;
         if(inputNumber.getClass() == String.class){
@@ -74,8 +90,14 @@ public class GenericMethods {
         }
 
     }
-
-
+    /**
+     * Modified version of the is greater than or equal to method with the base comparison number removed, only checks against 0.
+     * The check for null has been changed so that this will return true if null is passed.
+     * @author Dan
+     * @version 1.0
+     * @param input
+     * @return boolean
+     **/
     public static boolean isGreaterThanOrEqualToZeroOrNull(Object input){
         if(input == null) return true;
         return isGreaterThanOrEqualToZero(input);

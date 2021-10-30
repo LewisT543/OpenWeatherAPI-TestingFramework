@@ -56,23 +56,23 @@ public class ExampleTests {
         static void initAll(TestInfo testInfo) {
             connectionManager = new ConnectionManager();
             params = new HashMap<>();
-            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
         }
 
         @BeforeEach
         void init(TestInfo testInfo) {
-            System.out.println(testInfo.getDisplayName() + " : START");
             ConnectionManager.resetParams();
         }
 
         @Test
-        @DisplayName("is pressure above 0")
-        void isGroundPressureAValidValue() {
+        @DisplayName("is pressure above or equal to 0")
+        void isPressureAboveOrEqualToZero() {
             params.put("q","London");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isPressureGreaterOrEqualToZero());
         }
+
+
     }
 
 
