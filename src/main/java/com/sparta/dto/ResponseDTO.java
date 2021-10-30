@@ -404,7 +404,7 @@ public class ResponseDTO {
 		return isGreaterThanOrEqualToZero(getWind().getGust());
 	}
 
-	public boolean isGroundPressureGreaterOrEqualToZero() {
+	public boolean isGroundLevelGreaterOrEqualToZero() {
 		return isGreaterThanOrEqualToZero(getMain().getGrndLevel());
 	}
 

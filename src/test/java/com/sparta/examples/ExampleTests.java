@@ -23,46 +23,57 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class ExampleTests {
 
+    //------------------------------------------------------
+    // Set-up with framework
+    //------------------------------------------------------
     private static ConnectionManager connectionManager;
     private static HashMap<String, String> params;
     private static ResponseDTO rDTO;
+
+
+    //------------------------------------------------------
+    // Set-up without framework
+    //------------------------------------------------------
     private static final String ROOT = "https://api.openweathermap.org/data/2.5/weather";
-    private static String key;
     static HttpClient client = HttpClient.newHttpClient();
+    private static String key;
 
-    @BeforeAll
-    static void initAll(TestInfo testInfo) {
-        // fetch api key
-        try (InputStream input = Util.class.getClassLoader().getResourceAsStream("application.properties")) {
-            Properties prop = new Properties();
-            if (input == null) {
-                System.err.println("Sorry, unable to find application.properties");
-            }
-            prop.load(input);
-            key = prop.getProperty("API-Key");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+
+
+    //--------------------------------------------------------------------
+    //    Example area -
+    //--------------------------------------------------------------------
+
+
+
+
+    @Nested
+    @DisplayName("Examples")
+    class examples {
+
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+            connectionManager = new ConnectionManager();
+            params = new HashMap<>();
+            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
         }
-        connectionManager = new ConnectionManager();
-        params = new HashMap<>();
-        System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : START");
+            ConnectionManager.resetParams();
+        }
+
+        @Test
+        @DisplayName("is pressure above 0")
+        void isGroundPressureAValidValue() {
+            params.put("q","London");
+            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+            rDTO = Injector.injectResponseDTO(params.get("url"));
+            assertTrue(rDTO.isPressureGreaterOrEqualToZero());
+        }
     }
-
-    @BeforeEach
-    void init(TestInfo testInfo) {
-        System.out.println(testInfo.getDisplayName() + " : START");
-        ConnectionManager.resetParams();
-    }
-    //--------------------------------------------------------------------
-    //    Example area
-    //--------------------------------------------------------------------
-
-
-
-
-
-
-
 
 
 
@@ -74,6 +85,18 @@ public class ExampleTests {
     @DisplayName("UsingTheFramework")
     class usingTheFramework {
 
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+            connectionManager = new ConnectionManager();
+            params = new HashMap<>();
+            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+        }
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : START");
+            ConnectionManager.resetParams();
+        }
 
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
@@ -102,6 +125,7 @@ public class ExampleTests {
             assumeTrue(rDTO.isCoordValid());
         }
     }
+
     //--------------------------------------------------------------------
     //    Not Using the Framework
     //--------------------------------------------------------------------
@@ -109,6 +133,26 @@ public class ExampleTests {
     @DisplayName("Not Using the framework")
     class notUsingTheFramework {
 
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+            // fetch api key
+            try (InputStream input = Util.class.getClassLoader().getResourceAsStream("application.properties")) {
+                Properties prop = new Properties();
+                if (input == null) {
+                    System.err.println("Sorry, unable to find application.properties");
+                }
+                prop.load(input);
+                key = prop.getProperty("API-Key");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+        }
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : START");
+        }
 
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
