@@ -1,6 +1,10 @@
 # OpenWeatherAPI-TestingFramework
 A testing framework designed to test the functionality of the OpenWeatherAPI
 
+
+
+
+
 Firstly it is necessary to set up the connection to the api this is done as shown below.
 
 ![img.png](img.png)

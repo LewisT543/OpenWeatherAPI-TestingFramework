@@ -70,7 +70,9 @@ public class ExampleTests {
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isPressureGreaterOrEqualToZero());
+
         }
+
 
 
     }
@@ -110,7 +112,7 @@ public class ExampleTests {
         @Test
         @DisplayName("is the humidity valid")
         void isTheHumidityValidValue() {
-            params.put("q","London,GB");
+            params.put("q","London");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
