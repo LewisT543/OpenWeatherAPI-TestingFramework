@@ -26,7 +26,6 @@ public class ExampleTests {
     //------------------------------------------------------
     // Set-up with framework
     //------------------------------------------------------
-    private static ConnectionManager connectionManager;
     private static HashMap<String, String> params;
     private static ResponseDTO rDTO;
 
@@ -54,7 +53,6 @@ public class ExampleTests {
 
         @BeforeAll
         static void initAll(TestInfo testInfo) {
-            connectionManager = new ConnectionManager();
             params = new HashMap<>();
         }
 
@@ -89,7 +87,6 @@ public class ExampleTests {
 
         @BeforeAll
         static void initAll(TestInfo testInfo) {
-            connectionManager = new ConnectionManager();
             params = new HashMap<>();
             System.out.println(testInfo.getDisplayName() + " starting\n-----------");
         }
