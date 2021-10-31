@@ -9,7 +9,7 @@ Firstly it is necessary to declare the below variables, the hashmap that contain
 
 ![VariableDeclaration.png](Images%20For%20ReadMe/VariableDeclaration.png)
 
-The connection and parameters need to be instantiated so that they are ready to use.
+The Parameters need to be instantiated so that they are ready to use.
 
 ![BeforeAll.png](Images%20For%20ReadMe/BeforeAll.png)
 

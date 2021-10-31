@@ -53,29 +53,26 @@ public class ExampleTests {
 
         @BeforeAll
         static void initAll(TestInfo testInfo) {
-            params = new HashMap<>();
+           params = new HashMap<>();
         }
 
         @BeforeEach
         void init(TestInfo testInfo) {
-            ConnectionManager.resetParams();
+           ConnectionManager.resetParams();
         }
 
         @Test
-        @DisplayName("is pressure above or equal to 0")
-        void isPressureAboveOrEqualToZero() {
-            params.put("q","London");
-            ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
-            rDTO = Injector.injectResponseDTO(params.get("url"));
-            assertTrue(rDTO.isPressureGreaterOrEqualToZero());
-
+        @DisplayName("is pressure Greater or equal to 0")
+        void isPressureGreaterOrEqualToZero() {
+           params.put("q","London");
+           ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+           rDTO = Injector.injectResponseDTO(params.get("url"));
+           assertTrue(rDTO.isPressureGreaterOrEqualToZero());
         }
 
 
 
     }
-
-
 
 
     //--------------------------------------------------------------------
@@ -97,6 +94,8 @@ public class ExampleTests {
             ConnectionManager.resetParams();
         }
 
+
+
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
         void searchingByZipcodeReturnsTheCorrectZipcode() {
@@ -107,8 +106,8 @@ public class ExampleTests {
         }
 
         @Test
-        @DisplayName("is the humidity valid")
-        void isTheHumidityValidValue() {
+        @DisplayName("is the humidity value between 0 and 100")
+        void isTheHumidityValueBetween0And100() {
             params.put("q","London");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
@@ -121,7 +120,7 @@ public class ExampleTests {
             params.put("q", "London,GB");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
-            assumeTrue(rDTO.isCoordValid());
+            assertTrue(rDTO.isCoordValid());
         }
     }
 
