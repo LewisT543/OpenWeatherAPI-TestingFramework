@@ -23,48 +23,56 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class ExampleTests {
 
-    private static ConnectionManager connectionManager;
+    //------------------------------------------------------
+    // Set-up with framework
+    //------------------------------------------------------
     private static HashMap<String, String> params;
     private static ResponseDTO rDTO;
+
+
+    //------------------------------------------------------
+    // Set-up without framework
+    //------------------------------------------------------
     private static final String ROOT = "https://api.openweathermap.org/data/2.5/weather";
-    private static String key;
     static HttpClient client = HttpClient.newHttpClient();
+    private static String key;
 
-    @BeforeAll
-    static void initAll(TestInfo testInfo) {
-        // fetch api key
-        try (InputStream input = Util.class.getClassLoader().getResourceAsStream("application.properties")) {
-            Properties prop = new Properties();
-            if (input == null) {
-                System.err.println("Sorry, unable to find application.properties");
-            }
-            prop.load(input);
-            key = prop.getProperty("API-Key");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+
+
+    //--------------------------------------------------------------------
+    //    Example area -
+    //--------------------------------------------------------------------
+
+
+
+
+    @Nested
+    @DisplayName("Examples")
+    class examples {
+
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+           params = new HashMap<>();
         }
-        connectionManager = new ConnectionManager();
-        params = new HashMap<>();
-        System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+           ConnectionManager.resetParams();
+        }
+
+        @Test
+        @DisplayName("is pressure Greater or equal to 0")
+        void isPressureGreaterOrEqualToZero() {
+           params.put("q","London");
+           ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
+           rDTO = Injector.injectResponseDTO(params.get("url"));
+           assertTrue(rDTO.isPressureGreaterOrEqualToZero());
+        }
+
+
+
     }
-
-    @BeforeEach
-    void init(TestInfo testInfo) {
-        System.out.println(testInfo.getDisplayName() + " : START");
-        ConnectionManager.resetParams();
-    }
-    //--------------------------------------------------------------------
-    //    Example area
-    //--------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 
 
     //--------------------------------------------------------------------
@@ -73,6 +81,19 @@ public class ExampleTests {
     @Nested
     @DisplayName("UsingTheFramework")
     class usingTheFramework {
+
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+            params = new HashMap<>();
+            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+        }
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : START");
+            ConnectionManager.resetParams();
+        }
+
 
 
         @Test
@@ -85,9 +106,9 @@ public class ExampleTests {
         }
 
         @Test
-        @DisplayName("is the humidity valid")
-        void isTheHumidityValidValue() {
-            params.put("q","London,GB");
+        @DisplayName("is the humidity value between 0 and 100")
+        void isTheHumidityValueBetween0And100() {
+            params.put("q","London");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
             assertTrue(rDTO.isMainHumidityGreaterThan0AndLessThan100());
@@ -99,9 +120,10 @@ public class ExampleTests {
             params.put("q", "London,GB");
             ConnectionManager.getConnection(ConnectionManager.ENDPOINTS.WEATHER_Q,params);
             rDTO = Injector.injectResponseDTO(params.get("url"));
-            assumeTrue(rDTO.isCoordValid());
+            assertTrue(rDTO.isCoordValid());
         }
     }
+
     //--------------------------------------------------------------------
     //    Not Using the Framework
     //--------------------------------------------------------------------
@@ -109,6 +131,26 @@ public class ExampleTests {
     @DisplayName("Not Using the framework")
     class notUsingTheFramework {
 
+        @BeforeAll
+        static void initAll(TestInfo testInfo) {
+            // fetch api key
+            try (InputStream input = Util.class.getClassLoader().getResourceAsStream("application.properties")) {
+                Properties prop = new Properties();
+                if (input == null) {
+                    System.err.println("Sorry, unable to find application.properties");
+                }
+                prop.load(input);
+                key = prop.getProperty("API-Key");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println(testInfo.getDisplayName() + " starting\n-----------");
+        }
+
+        @BeforeEach
+        void init(TestInfo testInfo) {
+            System.out.println(testInfo.getDisplayName() + " : START");
+        }
 
         @Test
         @DisplayName("Searching by Zipcode returns the correct zipcode")
